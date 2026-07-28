@@ -118,6 +118,39 @@ describe("moveQuestion", () => {
     expect(result.outro.map((q) => q.id)).toEqual(["i-1"]);
   });
 
+  it("rejects a cross-phase move into a full destination", () => {
+    const input = phases();
+    input.intro = Array.from({ length: MAX_QUESTIONS_PER_PHASE }, (_, index) =>
+      question(`i-${index + 1}`),
+    );
+
+    const result = moveQuestion(
+      input,
+      { phase: "main", index: 0 },
+      { phase: "intro", index: MAX_QUESTIONS_PER_PHASE },
+    );
+
+    expect(result).toBe(input);
+    expect(result.intro).toHaveLength(MAX_QUESTIONS_PER_PHASE);
+    expect(result.main.map((q) => q.id)).toEqual(["m-1", "m-2"]);
+  });
+
+  it("still reorders items within a full phase", () => {
+    const input = phases();
+    input.intro = Array.from({ length: MAX_QUESTIONS_PER_PHASE }, (_, index) =>
+      question(`i-${index + 1}`),
+    );
+
+    const result = moveQuestion(
+      input,
+      { phase: "intro", index: 0 },
+      { phase: "intro", index: 1 },
+    );
+
+    expect(result.intro).toHaveLength(MAX_QUESTIONS_PER_PHASE);
+    expect(result.intro.slice(0, 2).map((q) => q.id)).toEqual(["i-2", "i-1"]);
+  });
+
   it("returns the input unchanged for an out-of-range source", () => {
     const input = phases();
     expect(moveQuestion(input, { phase: "outro", index: 0 }, { phase: "main", index: 0 })).toBe(input);
