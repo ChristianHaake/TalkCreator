@@ -74,7 +74,7 @@
   align-items: center;
   flex-shrink: 0;
   min-height: 40px;
-  padding: 5px 10px;
+  padding: 5px 10px 5px 8px;
   border: 1px solid #000;
   border-radius: 999px;
   background: #ffdd00;

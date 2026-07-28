@@ -75,7 +75,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 0.875rem;
+  padding: 0.5rem 0.875rem 0.5rem 0.75rem;
   background-color: var(--primary-soft);
   color: var(--primary);
   border: 1px solid transparent;
@@ -183,7 +183,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem 0.5rem 0.875rem;
   border-radius: var(--radius-sm);
   font-size: 0.875rem;
   font-weight: 500;

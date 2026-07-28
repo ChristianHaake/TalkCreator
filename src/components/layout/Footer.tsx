@@ -25,7 +25,7 @@ export function Footer() {
             rel="noreferrer"
             target="_blank"
           >
-            <Coffee aria-hidden="true" size={16} />
+            <Coffee aria-hidden="true" size={16} strokeWidth={2.5} />
             <span>{t("footer.coffee")}</span>
           </a>
           

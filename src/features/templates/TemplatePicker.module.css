@@ -19,7 +19,7 @@
   padding: 1rem;
   background-color: var(--app-bg);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-xl);
   transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
 }
 

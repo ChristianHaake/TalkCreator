@@ -94,6 +94,7 @@ export const fr = {
   "content.loading": "Chargement du contenu...",
   "content.notFoundTitle": "Page introuvable",
   "content.notFoundBody": "La page demandée n'a pas pu être chargée.",
+  "content.germanOnlyNotice": "Cette page est actuellement disponible uniquement en allemand.",
   "common.close": "Fermer",
   "common.cancel": "Annuler",
   "home.resetTitle": "Réinitialiser le projet ?",
