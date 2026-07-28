@@ -29,6 +29,7 @@
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--border);
+  text-wrap: balance;
 }
 
 .checklist {
@@ -79,9 +80,13 @@
 .sourceTitle {
   font-weight: 600;
   color: var(--text);
+  text-wrap: pretty;
 }
 
 .sourceUrl {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
   font-size: 0.875rem;
   color: var(--primary);
   word-break: break-all;
@@ -92,12 +97,15 @@
   color: var(--text);
   margin-top: 0;
   margin-bottom: 0.5rem;
+  text-wrap: balance;
 }
 
 .partner {
   font-size: 1.125rem;
   color: var(--text-muted);
   margin: 0;
+  font-variant-numeric: tabular-nums;
+  text-wrap: pretty;
 }
 
 .questionList {
@@ -110,6 +118,7 @@
   color: var(--text-muted);
   font-style: italic;
   text-align: center;
+  text-wrap: pretty;
 }
 
 .questionCard {
@@ -121,6 +130,8 @@
 .questionHeader {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .questionNumber {
@@ -129,15 +140,18 @@
   text-transform: uppercase;
   color: var(--primary);
   letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
 }
 
 .badgeHigh,
-.badgeOptional {
+.badgeOptional,
+.badgeTime {
   font-size: 0.75rem;
   font-weight: 700;
   padding: 0.25rem 0.5rem;
   border-radius: var(--radius-sm);
   text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
 }
 
 .badgeHigh {
@@ -150,12 +164,18 @@
   color: var(--text-muted);
 }
 
+.badgeTime {
+  background-color: var(--primary-soft);
+  color: var(--primary);
+}
+
 .questionText {
   font-size: 1.25rem;
   font-weight: 500;
   color: var(--text);
   margin: 0;
   line-height: 1.4;
+  text-wrap: pretty;
 }
 
 .notesSection {
@@ -176,6 +196,7 @@
   margin: 0;
   font-size: 0.9375rem;
   color: var(--text);
+  text-wrap: pretty;
 }
 
 .printSpace {
@@ -193,6 +214,12 @@
 .icebreakerCard {
   background-color: rgba(var(--primary-rgb, 10, 107, 206), 0.03);
   border-color: rgba(var(--primary-rgb, 10, 107, 206), 0.2);
+}
+
+@media (max-width: 900px) {
+  .sourceUrl {
+    min-height: 44px;
+  }
 }
 
 @media print {

@@ -1,0 +1,202 @@
+- generic [ref=f2e3]:
+  - banner [ref=f2e4]:
+    - generic [ref=f2e5]:
+      - link "TalkCreator" [ref=f2e7] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f2e8]:
+        - generic "Local data processing in the browser" [ref=f2e9]: Local processing
+        - generic "Select language" [ref=f2e13]:
+          - button "DE" [ref=f2e14] [cursor=pointer]
+          - button "EN" [pressed] [ref=f2e15] [cursor=pointer]
+          - button "FR" [ref=f2e16] [cursor=pointer]
+          - button "ES" [ref=f2e17] [cursor=pointer]
+          - button "NL" [ref=f2e18] [cursor=pointer]
+  - main [ref=f2e19]:
+    - generic [ref=f2e20]:
+      - generic "Switch view" [ref=f2e21]:
+        - button "Editor" [pressed] [ref=f2e22] [cursor=pointer]
+        - button "Preview" [ref=f2e23] [cursor=pointer]
+      - region "Editor" [ref=f2e25]:
+        - generic [ref=f2e26]:
+          - generic [ref=f2e27]:
+            - generic [ref=f2e28]: Editor
+            - heading "Edit Flow / Structure" [level=2] [ref=f2e29]
+          - generic [ref=f2e30]:
+            - button "New from template" [ref=f2e31] [cursor=pointer]
+            - button "Reset Project" [ref=f2e36] [cursor=pointer]
+        - generic [ref=f2e41]:
+          - generic [ref=f2e42]:
+            - heading "Project" [level=3] [ref=f2e43]
+            - generic [ref=f2e44]:
+              - generic [ref=f2e45]: "Project Title / Topic:"
+              - textbox "Project Title / Topic:" [ref=f2e46]:
+                - /placeholder: Name of the project
+                - text: Our Podcast Interview
+            - generic [ref=f2e47]:
+              - generic [ref=f2e48]: "Target / Participants:"
+              - textbox "Target / Participants:" [ref=f2e49]:
+                - /placeholder: People, class, or audience
+                - text: Jane Doe
+          - generic [ref=f2e50]:
+            - generic [ref=f2e51]:
+              - heading "Time planning" [level=3] [ref=f2e52]
+              - generic [ref=f2e53]:
+                - generic [ref=f2e54]: "Target time (min):"
+                - spinbutton "Target time (min):" [ref=f2e55]
+            - generic [ref=f2e56]:
+              - generic [ref=f2e60]:
+                - text: "Planned:"
+                - strong [ref=f2e61]: "15"
+                - text: min
+              - generic [ref=f2e62]: No target time set
+          - generic [ref=f2e63]:
+            - generic [ref=f2e64]:
+              - heading "Checklist (Preparation)" [level=3] [ref=f2e65]
+              - button "Add checklist item" [ref=f2e66] [cursor=pointer]
+            - generic [ref=f2e68]:
+              - generic [ref=f2e69]:
+                - textbox "Checklist item" [ref=f2e70]:
+                  - /placeholder: Task / Checklist item
+                  - text: Check recorder / microphone
+                - button "Remove checklist item" [ref=f2e71] [cursor=pointer]
+              - generic [ref=f2e75]:
+                - textbox "Checklist item" [ref=f2e76]:
+                  - /placeholder: Task / Checklist item
+                  - text: Provide water
+                - button "Remove checklist item" [ref=f2e77] [cursor=pointer]
+              - generic [ref=f2e81]:
+                - textbox "Checklist item" [ref=f2e82]:
+                  - /placeholder: Task / Checklist item
+                  - text: Consent form signed
+                - button "Remove checklist item" [ref=f2e83] [cursor=pointer]
+          - generic [ref=f2e87]:
+            - generic [ref=f2e88]:
+              - heading "Introduction / Warm-up" [level=3] [ref=f2e89]
+              - generic [ref=f2e90]:
+                - button "Suggestions" [ref=f2e91] [cursor=pointer]
+                - button "Add element" [ref=f2e94] [cursor=pointer]
+            - generic [ref=f2e97]:
+              - button "Move element" [ref=f2e98]
+              - generic [ref=f2e106]:
+                - generic [ref=f2e107]:
+                  - generic [ref=f2e108]: Item 1
+                  - textbox "Item 1" [ref=f2e109]:
+                    - /placeholder: Question, argument, task, or method...
+                    - text: What did you have for breakfast today?
+                - generic [ref=f2e110]:
+                  - generic [ref=f2e111]: Bullet points / Notes (optional)
+                  - textbox "Bullet points / Notes (optional)" [ref=f2e112]:
+                    - /placeholder: Options, bullet points, or notes...
+                    - text: Create a relaxed atmosphere
+                - generic [ref=f2e113]:
+                  - generic [ref=f2e114]:
+                    - generic [ref=f2e115]: "Duration (Min):"
+                    - spinbutton "Duration (Min):" [ref=f2e116]: "2"
+                  - generic [ref=f2e117]:
+                    - checkbox "Optional / Backup" [ref=f2e118]
+                    - generic [ref=f2e119]: Optional / Backup
+              - generic [ref=f2e120]:
+                - button "Move up" [disabled] [ref=f2e121]
+                - button "Move down" [disabled] [ref=f2e124]
+                - button "Delete element" [ref=f2e127] [cursor=pointer]
+          - generic [ref=f2e131]:
+            - generic [ref=f2e132]:
+              - heading "Main Part / Core" [level=3] [ref=f2e133]
+              - generic [ref=f2e134]:
+                - button "Suggestions" [ref=f2e135] [cursor=pointer]
+                - button "Add element" [ref=f2e138] [cursor=pointer]
+            - generic [ref=f2e140]:
+              - generic [ref=f2e141]:
+                - button "Move element" [ref=f2e142]
+                - generic [ref=f2e150]:
+                  - generic [ref=f2e151]:
+                    - generic [ref=f2e152]: Item 1
+                    - textbox "Item 1" [ref=f2e153]:
+                      - /placeholder: Question, argument, task, or method...
+                      - text: What was your biggest challenge in this project?
+                  - generic [ref=f2e154]:
+                    - generic [ref=f2e155]: Bullet points / Notes (optional)
+                    - textbox "Bullet points / Notes (optional)" [ref=f2e156]:
+                      - /placeholder: Options, bullet points, or notes...
+                      - text: Relate to current events if possible
+                  - generic [ref=f2e157]:
+                    - generic [ref=f2e158]:
+                      - generic [ref=f2e159]: "Duration (Min):"
+                      - spinbutton "Duration (Min):" [ref=f2e160]: "10"
+                    - generic [ref=f2e161]:
+                      - checkbox "Optional / Backup" [ref=f2e162]
+                      - generic [ref=f2e163]: Optional / Backup
+                - generic [ref=f2e164]:
+                  - button "Move up" [disabled] [ref=f2e165]
+                  - button "Move down" [ref=f2e168] [cursor=pointer]
+                  - button "Delete element" [ref=f2e171] [cursor=pointer]
+              - generic [ref=f2e175]:
+                - button "Move element" [ref=f2e176]
+                - generic [ref=f2e184]:
+                  - generic [ref=f2e185]:
+                    - generic [ref=f2e186]: Item 2
+                    - textbox "Item 2" [ref=f2e187]:
+                      - /placeholder: Question, argument, task, or method...
+                      - text: Which question have you always wanted to be asked?
+                  - generic [ref=f2e188]:
+                    - generic [ref=f2e189]: Bullet points / Notes (optional)
+                    - textbox "Bullet points / Notes (optional)" [ref=f2e190]:
+                      - /placeholder: Options, bullet points, or notes...
+                  - generic [ref=f2e191]:
+                    - generic [ref=f2e192]:
+                      - generic [ref=f2e193]: "Duration (Min):"
+                      - spinbutton "Duration (Min):" [ref=f2e194]: "3"
+                    - generic [ref=f2e195]:
+                      - checkbox "Optional / Backup" [checked] [ref=f2e196]
+                      - generic [ref=f2e197]: Optional / Backup
+                - generic [ref=f2e198]:
+                  - button "Move up" [ref=f2e199] [cursor=pointer]
+                  - button "Move down" [disabled] [ref=f2e202]
+                  - button "Delete element" [ref=f2e205] [cursor=pointer]
+          - generic [ref=f2e209]:
+            - generic [ref=f2e210]:
+              - heading "Conclusion / Outro" [level=3] [ref=f2e211]
+              - generic [ref=f2e212]:
+                - button "Suggestions" [ref=f2e213] [cursor=pointer]
+                - button "Add element" [ref=f2e216] [cursor=pointer]
+            - paragraph [ref=f2e219]: No elements for the conclusion.
+          - generic [ref=f2e220]:
+            - generic [ref=f2e221]:
+              - heading "Sources & References" [level=3] [ref=f2e222]
+              - button "Add Source" [ref=f2e223] [cursor=pointer]
+            - generic [ref=f2e226]:
+              - generic [ref=f2e227]:
+                - textbox "Source title" [ref=f2e228]:
+                  - /placeholder: Title of the source
+                  - text: "Wikipedia: History of podcasting"
+                - textbox "Source URL" [ref=f2e229]:
+                  - /placeholder: URL / Link
+                  - text: https://en.wikipedia.org/wiki/Podcast
+              - button "Remove source" [ref=f2e230] [cursor=pointer]
+      - generic [ref=f2e234]:
+        - generic [ref=f2e235]:
+          - generic [ref=f2e236]: Project
+          - button "Load" [ref=f2e237] [cursor=pointer]
+          - button "Choose File" [ref=f2e242]
+          - button "Save" [ref=f2e243] [cursor=pointer]
+        - generic [ref=f2e248]:
+          - generic [ref=f2e249]: Export
+          - button "Export (MD)" [ref=f2e250] [cursor=pointer]
+          - button "Print / PDF" [ref=f2e255] [cursor=pointer]
+  - contentinfo [ref=f2e260]:
+    - generic [ref=f2e261]:
+      - generic [ref=f2e262]: Local data processing in the browser
+      - generic [ref=f2e263]:
+        - navigation "Footer navigation" [ref=f2e264]:
+          - link "Help" [ref=f2e265] [cursor=pointer]:
+            - /url: /hilfe
+          - link "About" [ref=f2e266] [cursor=pointer]:
+            - /url: /ueber
+          - link "Privacy" [ref=f2e267] [cursor=pointer]:
+            - /url: /datenschutz
+          - link "Legal" [ref=f2e268] [cursor=pointer]:
+            - /url: /impressum
+        - link "Buy me a coffee" [ref=f2e269] [cursor=pointer]:
+          - /url: https://buymeacoffee.com/Haake
+        - link "GitHub repository" [ref=f2e273] [cursor=pointer]:
+          - /url: https://github.com/ChristianHaake/InterviewCreator
