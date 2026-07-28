@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { DragDropContext } from "@hello-pangea/dnd";
-import type { DropResult } from "@hello-pangea/dnd";
+import type { DropResult, ResponderProvided } from "@hello-pangea/dnd";
 import { FileDown, FileUp, LayoutTemplate, Printer, RotateCcw } from "lucide-react";
 import { useSessionPersistence } from "../shared/hooks/useSessionPersistence";
 import { useProjectStorage } from "../shared/hooks/useProjectStorage";
@@ -12,7 +12,8 @@ import { TimeBudget } from "../features/editor/TimeBudget";
 import { TemplatePicker } from "../features/templates/TemplatePicker";
 import { ConfirmDialog } from "../components/ui/ConfirmDialog";
 import { InterviewPreview } from "../features/preview/InterviewPreview";
-import { moveQuestion } from "../domain/projectSchema";
+import { MAX_QUESTIONS_PER_PHASE } from "../domain/projectSchema";
+import { moveQuestionWithAnnouncement } from "../features/editor/questionMove";
 import { createProjectFromTemplate, type TemplateId } from "../domain/templates";
 import type { InterviewPhases } from "../domain/types";
 import styles from "./Home.module.css";
@@ -27,8 +28,11 @@ const droppablePhase: Record<string, keyof InterviewPhases> = {
 export function Home() {
   const { state, setState, clearSession, applyProject } = useSessionPersistence();
   const { t, locale } = useTranslation();
-
-  const { handleDownload, handleExportMarkdown, handleUpload } = useProjectStorage(state, setState);
+  const [editorRevision, setEditorRevision] = useState(0);
+  const { handleDownload, handleExportMarkdown, handleUpload } = useProjectStorage(state, (next) => {
+    setState(next);
+    setEditorRevision((revision) => revision + 1);
+  });
   const [mobileView, setMobileView] = useState<"editor" | "preview">("editor");
   const [resetOpen, setResetOpen] = useState(false);
   const [pickerOpen, setPickerOpen] = useState(false);
@@ -56,11 +60,12 @@ export function Home() {
   const confirmTemplate = () => {
     if (pendingTemplate) {
       applyProject(createProjectFromTemplate(pendingTemplate, locale));
+      setEditorRevision((revision) => revision + 1);
     }
     setPendingTemplate(null);
   };
 
-  const handleDragEnd = (result: DropResult) => {
+  const handleDragEnd = (result: DropResult, provided: ResponderProvided) => {
     if (!result.destination) return;
 
     const sourcePhase = droppablePhase[result.source.droppableId];
@@ -71,13 +76,25 @@ export function Home() {
     const destinationIndex = result.destination.index;
     if (sourcePhase === destinationPhase && sourceIndex === destinationIndex) return;
 
+    const destinationTitle = t(`editor.${destinationPhase}Title`);
+    const moveResult = moveQuestionWithAnnouncement({
+      phases: state.phases,
+      source: { phase: sourcePhase, index: sourceIndex },
+      destination: { phase: destinationPhase, index: destinationIndex },
+      announce: provided.announce,
+      blockedMessage: t("editor.moveQuestionBlocked", { max: MAX_QUESTIONS_PER_PHASE }),
+      successMessage: t("editor.moveQuestionSuccess", {
+        section: destinationTitle,
+        position: destinationIndex + 1,
+      }),
+    });
+    if (!moveResult.moved) {
+      return;
+    }
+
     setState({
       ...state,
-      phases: moveQuestion(
-        state.phases,
-        { phase: sourcePhase, index: sourceIndex },
-        { phase: destinationPhase, index: destinationIndex },
-      ),
+      phases: moveResult.phases,
     });
   };
 
@@ -155,7 +172,7 @@ export function Home() {
               onChange={(cl) => setState({ ...state, checklist: cl })}
             />
 
-            <DragDropContext onDragEnd={handleDragEnd}>
+            <DragDropContext key={editorRevision} onDragEnd={handleDragEnd}>
               <QuestionList
                 title={t("editor.introTitle")}
                 droppableId="intro-list"
@@ -284,6 +301,7 @@ export function Home() {
           danger
           onConfirm={() => {
             clearSession();
+            setEditorRevision((revision) => revision + 1);
             setResetOpen(false);
           }}
           onCancel={() => setResetOpen(false)}

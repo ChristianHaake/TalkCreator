@@ -187,6 +187,13 @@ export function moveQuestion(
   source: { phase: keyof InterviewPhases; index: number },
   destination: { phase: keyof InterviewPhases; index: number },
 ): InterviewPhases {
+  if (
+    source.phase !== destination.phase &&
+    phases[destination.phase].length >= MAX_QUESTIONS_PER_PHASE
+  ) {
+    return phases;
+  }
+
   const next: InterviewPhases = {
     intro: [...phases.intro],
     main: [...phases.main],
