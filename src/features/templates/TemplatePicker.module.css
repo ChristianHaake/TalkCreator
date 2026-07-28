@@ -2,6 +2,7 @@
   margin: 0 0 1.25rem;
   color: var(--text-muted);
   font-size: 0.9375rem;
+  text-wrap: pretty;
 }
 
 .grid {
@@ -28,7 +29,7 @@
 }
 
 .card:active {
-  transform: translateY(1px);
+  transform: scale(0.96);
 }
 
 .iconWrap {
@@ -52,16 +53,24 @@
 .cardTitle {
   font-weight: 600;
   color: var(--text);
+  text-wrap: balance;
 }
 
 .cardDesc {
   font-size: 0.8125rem;
   color: var(--text-muted);
   line-height: 1.4;
+  text-wrap: pretty;
 }
 
 @media (max-width: 560px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:active {
+    transform: none;
   }
 }
