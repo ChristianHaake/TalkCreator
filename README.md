@@ -23,11 +23,11 @@ Einsatzszenarien:
 
 ## Features
 
-- Projekttitel und Interviewpartner erfassen
-- Interviewfragen nach Einleitung, Hauptteil und Schluss strukturieren
+- Projekttitel, Zielgruppe und Zeitplanung direkt im Gesprächsplan bearbeiten
+- Fragen nach Einleitung, Hauptteil und Schluss direkt im druckbaren Dokument strukturieren
 - Fragen mit Notizen, Dauer und Backup-Markierung pflegen
 - Vorbereitung per Checkliste planen
-- Quellen und Referenzen sammeln
+- Checkliste, Quellen und Referenzen im selben Dokument bearbeiten
 - Lokale Autospeicherung im Browser
 - JSON-Projektdateien importieren und exportieren
 - Markdown exportieren
@@ -54,7 +54,7 @@ Scripts:
 - `npm run typecheck` - run TypeScript type checking
 - `npm run lint` - run oxlint
 - `npm test` - run automated tests
-- `npm run verify` - run typecheck, lint, and build
+- `npm run verify` - run typecheck, lint, tests, and production build
 
 ## haak3 Standard
 

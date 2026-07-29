@@ -1,26 +1,14 @@
 .layout {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .main {
-  flex: 1;
-  min-height: 0;
   display: flex;
+  flex: 1;
   flex-direction: column;
-}
-
-/* On narrow screens, release the fixed viewport height so the page
-   scrolls naturally instead of trapping the editor in a tiny inner
-   scroll region. */
-@media (max-width: 900px) {
-  .layout {
-    height: auto;
-    min-height: 100vh;
-    min-height: 100dvh;
-  }
 }
 
 @media print {

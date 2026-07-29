@@ -9,7 +9,7 @@
 
 ## Stack
 
-- React 19 with TypeScript for the interactive editor and preview workflow.
+- React 19 with TypeScript for the editable talk-canvas workflow.
 - Vite builds the static application and PWA assets.
 - React Router provides direct routes for the editor and bundled content pages.
 - `idb-keyval` stores the autosaved interview project in IndexedDB.
@@ -20,8 +20,7 @@
 ## Source structure
 
 - `src/domain/`: project data types, schema constants, runtime validation, and legacy migration.
-- `src/features/editor/`: project metadata, checklist, source, and question editing controls.
-- `src/features/preview/`: printable interview preview.
+- `src/features/canvas/`: the editable and printable talk document, question movement, and canvas tests.
 - `src/shared/hooks/`: persistence and import/export hooks.
 - `src/components/layout/`: app shell, header, footer, and navigation.
 - `src/pages/`: editor home page and bundled Markdown content page.
@@ -30,7 +29,8 @@
 
 ## State
 
-- In-memory state is owned by `useSessionPersistence` and passed into editor, preview, and storage hooks.
+- In-memory state is owned by `useSessionPersistence` and passed into the talk canvas and storage hooks.
+- The canvas owns one transient editing target. It is not persisted and resets after import, reset, or template selection.
 - Project autosave is stored in IndexedDB under `interview-creator-session`.
 - Locale preference is stored in `localStorage` under `interview-creator-locale`.
 - Current project schema version: `1`.
@@ -77,4 +77,6 @@
 
 - Project export remains JSON rather than a custom extension for the current MVP.
 - Markdown export is one-way and not an editable project import format.
+- Editing happens directly in a single printable talk canvas; the previous separate editor and live preview were removed.
+- Canvas fields use controlled native inputs rather than `contentEditable`.
 - See `standard-conformance.md` for local standard status.

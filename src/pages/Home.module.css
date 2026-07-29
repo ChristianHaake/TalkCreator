@@ -1,12 +1,12 @@
 .container {
-  flex: 1;
-  min-height: 0;
   display: flex;
+  flex: none;
   flex-direction: column;
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
+  max-width: 1180px;
+  min-height: 0;
   padding: 1.5rem;
+  margin: 0 auto;
 }
 
 .loadingState {
@@ -17,52 +17,36 @@
   color: var(--text-muted);
 }
 
-.workspace {
+.canvasPanel {
   display: flex;
-  flex: 1;
-  min-height: 0;
-  gap: 2rem;
-}
-
-.editorPanel,
-.previewPanel {
-  flex: 1;
-  display: flex;
+  flex: none;
   flex-direction: column;
   min-height: 0;
-  min-width: 0;
-  max-width: 50%;
 }
 
 .panelHeading {
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 1.5rem;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .panelKicker {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--primary);
   display: block;
   margin-bottom: 0.25rem;
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .panelHeading h2 {
-  font-size: 1.5rem;
   margin: 0;
   color: var(--text);
+  font-size: 1.5rem;
   text-wrap: balance;
-}
-
-.panelHeading p {
-  margin: 0;
-  color: var(--text-muted);
-  font-size: 0.875rem;
-  text-wrap: pretty;
 }
 
 .headingActions {
@@ -71,203 +55,134 @@
   gap: 0.5rem;
 }
 
-.templateButton {
+.templateButton,
+.actionButtonSecondary,
+.actionButtonPrimary {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 0.875rem 0.5rem 0.75rem;
-  background-color: var(--primary-soft);
-  color: var(--primary);
-  border: 1px solid transparent;
+  min-height: 40px;
+  padding: 0.5rem 0.875rem;
   border-radius: var(--radius-sm);
   font-size: 0.875rem;
   font-weight: 600;
-  min-height: 40px;
   transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
+    background-color 0.15s,
+    border-color 0.15s,
+    color 0.15s,
     transform 0.15s ease-out;
+}
+
+.templateButton {
+  color: var(--primary);
+  background: var(--primary-soft);
+  border: 1px solid transparent;
 }
 
 .templateButton:hover {
   border-color: var(--primary);
 }
 
-.templateButton:active {
-  transform: scale(0.96);
-}
-
 .iconButton {
   display: inline-flex;
+  flex: 0 0 40px;
   align-items: center;
   justify-content: center;
-  flex: 0 0 40px;
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
   width: 40px;
   height: 40px;
   padding: 0;
+  color: var(--text-muted);
+  background: transparent;
+  border: 0;
   border-radius: var(--radius-sm);
-  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .iconButton:hover {
-  background-color: var(--surface);
   color: var(--text);
+  background: var(--surface);
 }
 
-.editorContent {
-  flex: 1;
-  overflow-y: auto;
-  padding-right: 0.5rem;
-}
-
-.previewStage {
-  flex: 1;
-  overflow-y: auto;
-  background-color: #f8f9fa;
-  border-radius: var(--radius-lg);
+.canvasStage {
+  flex: none;
+  min-height: 0;
   padding: 1.5rem;
+  overflow: visible;
+  background: var(--surface-subtle);
   border: 1px solid var(--border);
-}
-
-.liveIndicator {
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.liveIndicator span {
-  width: 8px;
-  height: 8px;
-  background-color: var(--primary);
-  border-radius: 50%;
+  border-radius: var(--radius-lg);
 }
 
 .actionBar {
   display: flex;
-  justify-content: space-between;
+  flex-shrink: 0;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
-  margin-top: 1rem;
   padding: 1rem;
-  background-color: var(--surface);
+  margin-top: 1rem;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  flex-shrink: 0;
 }
 
 .actionGroup {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
-  flex-wrap: wrap;
 }
 
 .actionGroup > span {
+  margin-right: 0.25rem;
+  color: var(--text-muted);
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--text-muted);
-  margin-right: 0.5rem;
-}
-
-.actionButtonSecondary,
-.actionButtonPrimary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem 0.5rem 0.875rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  min-height: 40px;
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    color 0.15s ease,
-    transform 0.15s ease-out;
 }
 
 .actionButtonSecondary {
-  background-color: var(--app-bg);
   color: var(--text);
+  background: var(--app-bg);
   border: 1px solid var(--border);
 }
 
-.actionButtonSecondary:hover:not(:disabled) {
-  background-color: var(--surface);
+.actionButtonSecondary:hover {
+  background: var(--surface);
   border-color: var(--text-muted);
 }
 
 .actionButtonPrimary {
-  background-color: var(--primary);
-  color: white;
+  color: #fff;
+  background: var(--primary);
   border: 1px solid var(--primary);
 }
 
-.actionButtonPrimary:hover:not(:disabled) {
-  background-color: var(--primary-hover);
+.actionButtonPrimary:hover {
+  background: var(--primary-hover);
 }
 
-.actionButtonSecondary:active:not(:disabled),
-.actionButtonPrimary:active:not(:disabled) {
+.templateButton:active,
+.actionButtonSecondary:active,
+.actionButtonPrimary:active {
   transform: scale(0.96);
 }
 
-.actionButtonSecondary:disabled,
-.actionButtonPrimary:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Mobile Toggle */
-.mobileViewToggle {
-  display: none;
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 0.25rem;
-  margin-bottom: 1rem;
-}
-
-.mobileViewToggle button {
-  flex: 1;
-  background: none;
-  border: none;
-  padding: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  min-height: 40px;
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease,
-    box-shadow 0.15s ease;
-}
-
-.mobileViewToggle button.activeTab {
-  background-color: var(--app-bg);
-  color: var(--text);
-  box-shadow: var(--shadow-sm);
-}
-
-/* Responsive Layout */
 @media (max-width: 900px) {
-  .mobileViewToggle {
-    display: flex;
+  .container {
+    flex: none;
+    min-height: 0;
+    padding: 1rem;
   }
 
-  .mobileViewToggle button,
+  .canvasPanel {
+    flex: none;
+  }
+
+  .canvasStage {
+    padding: 1rem;
+    overflow: visible;
+  }
+
   .templateButton,
   .iconButton,
   .actionButtonSecondary,
@@ -281,41 +196,9 @@
     height: 44px;
   }
 
-  /* Let the page grow with its content instead of confining the editor
-     and preview to internal scroll regions inside a locked viewport. */
-  .container {
-    min-height: 0;
-    padding: 1rem;
-  }
-
-  .workspace {
-    flex: none;
-  }
-
-  .editorPanel,
-  .previewPanel {
-    display: none;
-    max-width: 100%;
-    flex: none;
-  }
-
-  .editorContent {
-    overflow: visible;
-    padding-right: 0;
-  }
-
-  .previewStage {
-    overflow: visible;
-  }
-
-  .mobilePanelActive {
-    display: flex;
-  }
-
   .actionBar {
-    flex-direction: column;
     align-items: stretch;
-    gap: 1rem;
+    flex-direction: column;
   }
 
   .actionGroup {
@@ -323,55 +206,67 @@
   }
 }
 
-@media (max-width: 520px) {
-  .editorPanel .panelHeading {
-    flex-direction: column;
-    gap: 0.75rem;
+@media (max-width: 600px) {
+  .container {
+    padding: 0.75rem 0;
   }
 
-  .editorPanel .headingActions {
-    width: 100%;
+  .panelHeading,
+  .actionBar {
+    margin-right: 0.75rem;
+    margin-left: 0.75rem;
+  }
+
+  .panelHeading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .headingActions {
     justify-content: flex-end;
+  }
+
+  .canvasStage {
+    padding: 0;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+
+  .actionGroup > span {
+    width: 100%;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .templateButton:active,
-  .actionButtonSecondary:active:not(:disabled),
-  .actionButtonPrimary:active:not(:disabled) {
+  .actionButtonSecondary:active,
+  .actionButtonPrimary:active {
     transform: none;
   }
 }
 
-/* Print: only the interview sheet, full length */
 @media print {
   .container {
-    padding: 0;
+    display: block;
     max-width: none;
-    display: block;
+    padding: 0;
   }
 
-  .workspace {
-    display: block;
-  }
-
-  .mobileViewToggle,
-  .editorPanel,
-  .actionBar,
-  .panelHeading {
+  .panelHeading,
+  .actionBar {
     display: none !important;
   }
 
-  .previewPanel {
-    display: block !important;
-    max-width: 100%;
+  .canvasPanel {
+    display: block;
   }
 
-  .previewStage {
-    overflow: visible;
-    background-color: #ffffff;
-    border: none;
-    border-radius: 0;
+  .canvasStage {
     padding: 0;
+    overflow: visible;
+    background: #fff;
+    border: 0;
+    border-radius: 0;
   }
 }
