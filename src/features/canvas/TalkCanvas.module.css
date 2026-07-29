@@ -1,0 +1,757 @@
+.canvas {
+  width: min(100%, 860px);
+  margin: 0 auto;
+  padding: 2.75rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.documentHeader {
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.documentTitle {
+  margin: 0;
+}
+
+.editableText,
+.editableMeta,
+.targetButton,
+.checklistText,
+.editableQuestion,
+.sourceEditButton {
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+}
+
+.editableText:hover,
+.editableMeta:hover,
+.targetButton:hover,
+.checklistText:hover,
+.editableQuestion:hover,
+.sourceEditButton:hover {
+  background: var(--primary-soft);
+  border-color: color-mix(in srgb, var(--primary) 24%, transparent);
+}
+
+.editableTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 48px;
+  padding: 0.25rem 0.5rem;
+  margin: -0.25rem -0.5rem 0.25rem;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.editableMeta {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  min-height: 40px;
+  padding: 0.25rem 0.5rem;
+  margin-left: -0.5rem;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.editHint {
+  flex: none;
+  color: var(--primary);
+  opacity: 0.7;
+}
+
+.timeSummary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-top: 0.35rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.targetButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 40px;
+  padding: 0.25rem 0.5rem;
+  color: var(--text-muted);
+}
+
+.headerEditor,
+.questionEditor,
+.sourceEditor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.headerEditor {
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background: var(--surface-subtle);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-md);
+}
+
+.targetEditor {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.targetEditor label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.targetEditor input {
+  width: 6rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+  font-weight: 600;
+}
+
+.field > span,
+.compactField > span {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+.field input,
+.field textarea,
+.targetEditor input,
+.compactField input,
+.inlineEditor input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.625rem 0.75rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font: inherit;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus,
+.targetEditor input:focus,
+.compactField input:focus,
+.inlineEditor input:focus {
+  border-color: var(--primary);
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+
+.titleInput {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+}
+
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.sectionHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sectionTitle {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.25rem;
+  text-wrap: balance;
+}
+
+.suggestionButton,
+.addButton,
+.doneButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 40px;
+  padding: 0.5rem 0.8rem;
+  color: var(--primary);
+  background: var(--primary-soft);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    transform 0.15s ease-out;
+}
+
+.suggestionButton:hover,
+.addButton:hover:not(:disabled) {
+  border-color: var(--primary);
+}
+
+.doneButton {
+  align-self: flex-end;
+  color: #fff;
+  background: var(--primary);
+}
+
+.doneButton:hover {
+  background: var(--primary-hover);
+}
+
+.suggestionButton:active,
+.addButton:active:not(:disabled),
+.doneButton:active {
+  transform: scale(0.96);
+}
+
+.suggestionPanel {
+  padding: 0.875rem;
+  margin-bottom: 1rem;
+  background: var(--surface-subtle);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+}
+
+.suggestionPanel p {
+  margin: 0 0 0.625rem;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+.suggestionChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.suggestionChips button {
+  min-height: 40px;
+  padding: 0.4rem 0.75rem;
+  color: var(--text);
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.suggestionChips button:hover:not(:disabled) {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+}
+
+.questionList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  min-height: 1px;
+}
+
+.questionCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  margin: -0.75rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+}
+
+.questionCard:hover {
+  border-color: var(--border);
+}
+
+.introCard {
+  background: color-mix(in srgb, var(--primary-soft) 30%, transparent);
+}
+
+.editingCard {
+  background: var(--surface-subtle);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.dragging {
+  background: var(--surface);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-medium);
+}
+
+.itemControls {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.35rem;
+  z-index: 2;
+  display: flex;
+  gap: 0.2rem;
+  padding: 0.2rem;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: var(--text-muted);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-sm);
+}
+
+.iconButton:hover:not(:disabled) {
+  color: var(--text);
+  background: var(--app-bg);
+}
+
+.iconButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.deleteButton:hover:not(:disabled) {
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+
+.editableQuestion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.6rem;
+  padding-right: 11rem;
+}
+
+.questionHeader {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.questionNumber {
+  color: var(--primary);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+.badgeOptional,
+.badgeTime {
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+.badgeOptional {
+  color: var(--text-muted);
+  background: var(--surface-subtle);
+}
+
+.badgeTime {
+  color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.questionText {
+  display: block;
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.notesSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.875rem;
+  color: var(--text);
+  background: var(--app-bg);
+  border-left: 3px solid var(--primary);
+  border-radius: var(--radius-sm);
+}
+
+.notesSection strong {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+.questionEditor {
+  padding: 0.5rem;
+}
+
+.questionEditor .questionHeader {
+  padding-right: 11rem;
+}
+
+.compactField {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.compactField input {
+  width: 4.5rem;
+  min-height: 40px;
+}
+
+.backupField {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 40px;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.backupField input,
+.checklistCheckbox {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--primary);
+}
+
+.checklistToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-left: -8px;
+}
+
+.questionInput {
+  font-size: 1.15rem !important;
+  font-weight: 600 !important;
+}
+
+.doneRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.printSpace {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+}
+
+.printLine {
+  width: 100%;
+  border-bottom: 1px dashed var(--border);
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.checklistItem {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) 40px;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 44px;
+}
+
+.checklistText {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  min-height: 40px;
+  padding: 0.35rem 0.5rem;
+}
+
+.inlineEditor {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.inlineEditor .doneButton {
+  flex: none;
+}
+
+.addRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.addButton:disabled,
+.suggestionChips button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.limitMessage {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+.sourceList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sourceItem {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 40px;
+  gap: 0.75rem;
+  align-items: start;
+  padding: 1rem;
+  background: var(--app-bg);
+  border: 1px solid transparent;
+  border-left: 3px solid var(--primary);
+  border-radius: var(--radius-sm);
+}
+
+.sourceContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.sourceEditButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 40px;
+  padding: 0.25rem 0.4rem;
+  margin: -0.25rem -0.4rem 0;
+}
+
+.sourceTitle {
+  color: var(--text);
+  font-weight: 600;
+  text-wrap: pretty;
+}
+
+.sourceUrl,
+.invalidSourceUrl {
+  min-height: 40px;
+  color: var(--primary);
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+
+.sourceUrl {
+  display: inline-flex;
+  align-items: center;
+}
+
+.invalidSourceUrl {
+  color: var(--danger);
+}
+
+.emptyText,
+.placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+  text-wrap: pretty;
+}
+
+@media (max-width: 900px) {
+  .canvas {
+    padding: 2rem;
+  }
+
+  .iconButton,
+  .suggestionButton,
+  .addButton,
+  .doneButton,
+  .targetButton,
+  .editableMeta,
+  .checklistText,
+  .checklistToggle,
+  .sourceEditButton,
+  .suggestionChips button,
+  .sourceUrl {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .checklistToggle {
+    width: 44px;
+    height: 44px;
+    margin-left: -10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .canvas {
+    padding: 1.25rem;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .editableTitle {
+    font-size: 1.55rem;
+  }
+
+  .sectionHeading,
+  .timeSummary,
+  .targetEditor,
+  .addRow {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .suggestionButton,
+  .addButton {
+    align-self: flex-start;
+  }
+
+  .itemControls {
+    position: static;
+    align-self: flex-end;
+    order: -1;
+  }
+
+  .editableQuestion,
+  .questionEditor {
+    padding: 0.5rem;
+  }
+
+  .questionEditor .questionHeader {
+    padding-right: 0;
+    margin-bottom: 0.75rem;
+  }
+
+  .questionText {
+    font-size: 1.05rem;
+  }
+
+  .inlineEditor {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .checklistItem {
+    grid-template-columns: 24px minmax(0, 1fr) 44px;
+  }
+
+  .sourceItem {
+    grid-template-columns: minmax(0, 1fr) 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .suggestionButton:active,
+  .addButton:active:not(:disabled),
+  .doneButton:active {
+    transform: none;
+  }
+}
+
+@media print {
+  .canvas {
+    width: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .canvasControls {
+    display: none !important;
+  }
+
+  .editableText,
+  .editableMeta,
+  .targetButton,
+  .checklistText,
+  .editableQuestion,
+  .sourceEditButton {
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 0;
+  }
+
+  .questionCard {
+    padding: 0;
+    margin: 0;
+    break-inside: avoid;
+  }
+
+  .questionCard:hover {
+    border-color: transparent;
+  }
+
+  .checklistItem {
+    grid-template-columns: 24px 1fr;
+  }
+
+  .sourceItem {
+    display: block;
+  }
+}

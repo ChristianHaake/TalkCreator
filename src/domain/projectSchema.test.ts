@@ -91,6 +91,30 @@ describe("project schema", () => {
     expect(result.state.phases.intro).toHaveLength(MAX_QUESTIONS_PER_PHASE);
     expect(result.state.checklist).toHaveLength(MAX_CHECKLIST_ITEMS);
   });
+
+  it("normalizes duplicate imported question ids across and within phases", () => {
+    const result = parseInterviewProject({
+      title: "Duplicate ids",
+      phases: {
+        intro: [{ id: "duplicate", text: "Intro", notes: "" }],
+        main: [
+          { id: "duplicate", text: "Main one", notes: "" },
+          { id: "duplicate", text: "Main two", notes: "" },
+        ],
+        outro: [{ id: "duplicate", text: "Outro", notes: "" }],
+      },
+    });
+
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    const ids = [
+      ...result.state.phases.intro,
+      ...result.state.phases.main,
+      ...result.state.phases.outro,
+    ].map((question) => question.id);
+    expect(ids[0]).toBe("duplicate");
+    expect(new Set(ids).size).toBe(ids.length);
+  });
 });
 
 describe("moveQuestion", () => {

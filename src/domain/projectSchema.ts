@@ -80,6 +80,37 @@ function parseQuestionArray(value: unknown, phase: keyof InterviewPhases): Quest
     .filter((item): item is Question => item !== null);
 }
 
+function ensureUniqueQuestionIds(phases: InterviewPhases): InterviewPhases {
+  const phaseOrder: Array<keyof InterviewPhases> = ["intro", "main", "outro"];
+  const reserved = new Set(
+    phaseOrder.flatMap((phase) => phases[phase].map((question) => question.id)),
+  );
+  const used = new Set<string>();
+
+  return Object.fromEntries(
+    phaseOrder.map((phase) => [
+      phase,
+      phases[phase].map((question, index) => {
+        if (!used.has(question.id)) {
+          used.add(question.id);
+          return question;
+        }
+
+        const base = `${phase}-${index + 1}`;
+        let replacement = base;
+        let suffix = 2;
+        while (reserved.has(replacement) || used.has(replacement)) {
+          replacement = `${base}-${suffix}`;
+          suffix += 1;
+        }
+        used.add(replacement);
+        reserved.add(replacement);
+        return { ...question, id: replacement };
+      }),
+    ]),
+  ) as InterviewPhases;
+}
+
 function parseChecklistItem(value: unknown, index: number): ChecklistItem | null {
   if (!isPlainObject(value)) return null;
   return {
@@ -122,11 +153,11 @@ function normalizeProjectShape(input: PlainObject) {
   }
 
   const phasesSource = isPlainObject(input.phases) ? input.phases : {};
-  const phases: InterviewPhases = {
+  const phases = ensureUniqueQuestionIds({
     intro: parseQuestionArray(phasesSource.intro ?? input.icebreakers, "intro"),
     main: parseQuestionArray(phasesSource.main ?? input.questions, "main"),
     outro: parseQuestionArray(phasesSource.outro, "outro"),
-  };
+  });
 
   const fallback = createDefaultInterviewState();
   const now = new Date().toISOString();
