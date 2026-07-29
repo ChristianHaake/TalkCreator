@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Check } from 'lucide-react';
 import styles from './Header.module.css';
 import { useTranslation } from '../../i18n';
