@@ -140,6 +140,14 @@
   text-transform: uppercase;
 }
 
+.importError {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--danger, #b42318);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
 .actionButtonSecondary {
   color: var(--text);
   background: var(--app-bg);
@@ -254,7 +262,8 @@
   }
 
   .panelHeading,
-  .actionBar {
+  .actionBar,
+  .importError {
     display: none !important;
   }
 

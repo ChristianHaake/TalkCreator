@@ -42,8 +42,13 @@
 - File extension: `.json`.
 - Media type: `application/json`.
 - Schema version: `schemaVersion: 1`.
-- Import validates parsed JSON at runtime before replacing state.
-- Unsupported future schema versions are rejected.
+- Schema-v1 imports are validated strictly; malformed versions, fields, entries,
+  timestamps, durations, and oversized collections reject the complete file.
+- Valid imports are normalized first and replace state only after confirmation.
+- Duplicate or empty question, checklist, and source IDs receive deterministic,
+  collision-safe replacements.
+- Unsupported future schema versions are rejected with a localized inline
+  message.
 - Maximum project file size: 512 KiB.
 - Maximum imported questions per phase: 100.
 - Maximum checklist items: 100.
