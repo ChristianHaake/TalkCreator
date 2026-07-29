@@ -1,45 +1,57 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router';
 import ReactMarkdown from 'react-markdown';
 import { ArrowLeft } from 'lucide-react';
 import styles from './ContentPage.module.css';
 import { useTranslation } from '../i18n';
-
-// Load all markdown files from the content directory as raw strings
-const markdownFiles = import.meta.glob('../../content/*.md', { query: '?raw', import: 'default' });
+import type { Locale } from '../domain/types';
+import { resolveContentPage } from './contentPages';
 
 export function ContentPage() {
   const { pageId } = useParams<{ pageId: string }>();
-  const { t } = useTranslation();
+  const { locale, t } = useTranslation();
   const [content, setContent] = useState<string>('');
+  const [contentLanguage, setContentLanguage] = useState<Locale>(locale);
+  const [isGermanFallback, setIsGermanFallback] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    let cancelled = false;
+
     const loadContent = async () => {
       setLoading(true);
       setError(false);
+      setIsGermanFallback(false);
+      setContentLanguage(locale);
+
+      const resolvedPage = resolveContentPage(pageId, locale);
+      if (!resolvedPage) {
+        setError(true);
+        setLoading(false);
+        return;
+      }
+
       try {
-        const path = `../../content/${pageId}.md`;
-        const loadMarkdown = markdownFiles[path] as () => Promise<string>;
-        
-        if (loadMarkdown) {
-          const text = await loadMarkdown();
-          setContent(text);
-        } else {
-          setError(true);
-        }
+        const text = await resolvedPage.load();
+        if (cancelled) return;
+        setContent(text);
+        setContentLanguage(resolvedPage.language);
+        setIsGermanFallback(resolvedPage.isGermanFallback);
       } catch {
+        if (cancelled) return;
         setError(true);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     };
 
-    if (pageId) {
-      loadContent();
-    }
-  }, [pageId]);
+    void loadContent();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [locale, pageId]);
 
   return (
     <div className={styles.container}>
@@ -50,7 +62,7 @@ export function ContentPage() {
         </Link>
       </div>
 
-      <article className={styles.article}>
+      <article className={styles.article} lang={contentLanguage}>
         {loading && <p>{t("content.loading")}</p>}
         {error && (
           <div>
@@ -59,7 +71,14 @@ export function ContentPage() {
           </div>
         )}
         {!loading && !error && (
-          <ReactMarkdown>{content}</ReactMarkdown>
+          <>
+            {isGermanFallback && (
+              <p className={styles.languageNotice} lang={locale}>
+                {t("content.germanOnlyNotice")}
+              </p>
+            )}
+            <ReactMarkdown>{content}</ReactMarkdown>
+          </>
         )}
       </article>
     </div>

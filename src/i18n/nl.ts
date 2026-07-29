@@ -94,6 +94,7 @@ export const nl = {
   "content.loading": "Inhoud wordt geladen...",
   "content.notFoundTitle": "Pagina niet gevonden",
   "content.notFoundBody": "De opgevraagde pagina kon niet worden geladen.",
+  "content.germanOnlyNotice": "Deze pagina is momenteel alleen in het Duits beschikbaar.",
   "common.close": "Sluiten",
   "common.cancel": "Annuleren",
   "home.resetTitle": "Project resetten?",

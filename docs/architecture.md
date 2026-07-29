@@ -26,6 +26,7 @@
 - `src/components/layout/`: app shell, header, footer, and navigation.
 - `src/pages/`: editor home page and bundled Markdown content page.
 - `src/i18n/`: static UI dictionaries and locale provider.
+- `content/`: German source pages plus lazy-loaded EN, FR, ES, and NL Help/About translations.
 
 ## State
 
@@ -56,6 +57,12 @@
 - User-created interview content is not sent to an application backend.
 - Production network destinations are limited to static app assets from the hosting origin plus user-initiated external links.
 - Hosting-provider request metadata may be processed by Cloudflare Pages and must be described in the privacy page before release.
+
+## Content localization
+
+- Help and About are bundled in DE, EN, FR, ES, and NL and loaded lazily for the selected locale.
+- Privacy and Imprint remain German pending operator-reviewed translations.
+- Non-German legal routes identify the article as German and show a localized availability notice.
 
 ## Deployment
 

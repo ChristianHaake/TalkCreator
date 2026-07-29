@@ -165,6 +165,20 @@ describe("QuestionList compact editing", () => {
     expect(screen.queryByRole("textbox", { name: "Item 2" })).not.toBeInTheDocument();
   });
 
+  it("exposes the backup checkbox through its full label", async () => {
+    const user = userEvent.setup();
+    render(<Harness />);
+
+    await user.click(screen.getByRole("button", { name: "Edit item 1" }));
+    const checkbox = screen.getByRole("checkbox", { name: "Optional / Backup" });
+
+    expect(checkbox).toBeChecked();
+    expect(checkbox.closest("label")).toHaveTextContent("Optional / Backup");
+
+    await user.click(screen.getByText("Optional / Backup"));
+    expect(checkbox).not.toBeChecked();
+  });
+
   it("preserves edits when Done collapses the item", async () => {
     const user = userEvent.setup();
     render(<Harness />);

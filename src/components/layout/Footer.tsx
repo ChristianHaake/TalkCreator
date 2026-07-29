@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Coffee } from 'lucide-react';
 import styles from './Footer.module.css';
 import { useTranslation } from '../../i18n';
@@ -25,7 +25,7 @@ export function Footer() {
             rel="noreferrer"
             target="_blank"
           >
-            <Coffee aria-hidden="true" size={16} />
+            <Coffee aria-hidden="true" size={16} strokeWidth={2.5} />
             <span>{t("footer.coffee")}</span>
           </a>
           

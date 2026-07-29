@@ -34,6 +34,16 @@
   border: 1px solid var(--border);
 }
 
+.languageNotice {
+  margin: 0 0 1.5rem;
+  padding: 0.75rem 1rem;
+  color: var(--warning);
+  background-color: var(--warning-soft);
+  border-left: 4px solid color-mix(in srgb, var(--warning) 35%, transparent);
+  border-radius: var(--radius-sm);
+  text-wrap: pretty;
+}
+
 .article h1 {
   margin-top: 0;
   font-size: 2rem;

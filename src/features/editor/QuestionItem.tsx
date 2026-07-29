@@ -230,13 +230,15 @@ export const QuestionItem = memo(function QuestionItem({
                     />
                   </div>
                   <div className={`${styles.inputGroup} ${styles.inlineInputGroup}`}>
-                    <input
-                      type="checkbox"
-                      id={`question-backup-${question.id}`}
-                      checked={question.is_backup || false}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdate({ is_backup: e.target.checked })}
-                    />
-                    <label htmlFor={`question-backup-${question.id}`}>{t("editor.backupLabel")}</label>
+                    <label className={styles.backupToggle} htmlFor={`question-backup-${question.id}`}>
+                      <input
+                        type="checkbox"
+                        id={`question-backup-${question.id}`}
+                        checked={question.is_backup || false}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdate({ is_backup: e.target.checked })}
+                      />
+                      <span>{t("editor.backupLabel")}</span>
+                    </label>
                   </div>
                 </div>
               </div>

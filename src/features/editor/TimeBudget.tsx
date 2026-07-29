@@ -68,7 +68,7 @@ export const TimeBudget = memo(function TimeBudget({ planned, target, onTargetCh
         <div className={styles.budgetBar} aria-hidden="true">
           <div
             className={`${styles.budgetBarFill} ${over ? styles.budgetBarOver : ""}`}
-            style={{ width: `${ratio * 100}%` }}
+            style={{ transform: `scaleX(${ratio})` }}
           />
         </div>
       )}
