@@ -16,7 +16,7 @@
 
 .brand {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 1rem;
   min-width: 0;
 }
@@ -25,13 +25,24 @@
   display: inline-flex;
   align-items: center;
   min-height: 40px;
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: var(--text);
+  flex-shrink: 0;
 }
+
 .logo:hover {
   text-decoration: none;
-  color: var(--primary);
+}
+
+.logoImage {
+  display: block;
+  width: auto;
+  height: 58px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  transition: opacity 0.15s ease;
+}
+
+.logo:hover .logoImage {
+  opacity: 0.88;
 }
 
 .tagline {
@@ -85,8 +96,11 @@
   }
 
   .logo {
-    font-size: 1rem;
     min-height: 44px;
+  }
+
+  .logoImage {
+    height: 44px;
   }
 
   .privacyIndicator span {

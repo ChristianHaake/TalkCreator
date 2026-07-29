@@ -13,7 +13,13 @@ export function Header() {
       <div className={styles.container}>
         <div className={styles.brand}>
           <Link to="/" className={styles.logo}>
-            {t("app.title")}
+            <img
+              src="/brand/talkcreator-logo-wide.png"
+              alt={t("app.title")}
+              className={styles.logoImage}
+              width="680"
+              height="298"
+            />
           </Link>
           <span className={styles.tagline}>
             {t("app.metaDescription")}

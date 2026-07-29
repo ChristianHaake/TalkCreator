@@ -13,12 +13,12 @@ export default defineConfig({
         short_name: 'TalkCreator',
         description: 'Planungswerkzeug für strukturierte Gespräche — Interviews, Debatten, Podcasts oder Unterricht.',
         lang: 'de',
-        theme_color: '#ffffff',
+        theme_color: '#245dcc',
         icons: [
           {
-            src: 'favicon.svg',
-            sizes: 'any',
-            type: 'image/svg+xml',
+            src: 'favicon-64x64.png',
+            sizes: '64x64',
+            type: 'image/png',
             purpose: 'any',
           },
           {
