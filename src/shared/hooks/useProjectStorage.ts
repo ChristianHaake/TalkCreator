@@ -1,6 +1,7 @@
 import { MAX_PROJECT_FILE_BYTES, parseProjectJson, PROJECT_SCHEMA_VERSION } from "../../domain/projectSchema";
 import type { InterviewState } from "../../domain/types";
 import { useTranslation } from "../../i18n";
+import { useRef, useState } from "react";
 
 function downloadTextFile(contents: string, filename: string, type: string) {
   const blob = new Blob([contents], { type });
@@ -20,6 +21,9 @@ function safeFilename(title: string) {
 
 export function useProjectStorage(state: InterviewState | null, setState: (state: InterviewState) => void) {
   const { t } = useTranslation();
+  const [pendingImport, setPendingImport] = useState<InterviewState | null>(null);
+  const [importError, setImportError] = useState<string | null>(null);
+  const importSelectionRef = useRef(0);
 
   function handleDownload() {
     if (!state) return;
@@ -104,30 +108,61 @@ export function useProjectStorage(state: InterviewState | null, setState: (state
   function handleUpload(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
     if (!file) return;
+    const selection = importSelectionRef.current + 1;
+    importSelectionRef.current = selection;
+    setImportError(null);
     if (file.size > MAX_PROJECT_FILE_BYTES) {
-      alert(t("storage.fileTooLarge"));
+      setImportError(t("storage.fileTooLarge"));
       event.target.value = "";
       return;
     }
 
     const reader = new FileReader();
     reader.onload = (e) => {
+      if (selection !== importSelectionRef.current) return;
       const content = typeof e.target?.result === "string" ? e.target.result : "";
       const result = parseProjectJson(content);
       if (result.ok) {
-        setState(result.state);
+        setPendingImport(result.state);
       } else if (result.reason === "invalid-json") {
-        alert(t("storage.readError"));
+        setImportError(t("storage.invalidJson"));
+      } else if (result.reason === "future-version") {
+        setImportError(t("storage.unsupportedVersion"));
+      } else if (result.reason === "invalid-schema-version") {
+        setImportError(t("storage.invalidVersion"));
       } else {
-        alert(t("storage.invalidFormat"));
+        setImportError(t("storage.invalidFormat"));
       }
     };
-    reader.onerror = () => alert(t("storage.readError"));
+    reader.onerror = () => {
+      if (selection === importSelectionRef.current) {
+        setImportError(t("storage.readError"));
+      }
+    };
     reader.readAsText(file);
     
     // Reset input
     event.target.value = '';
   }
 
-  return { handleDownload, handleExportMarkdown, handleUpload };
+  function confirmImport() {
+    if (!pendingImport) return;
+    setState(pendingImport);
+    setPendingImport(null);
+    setImportError(null);
+  }
+
+  function cancelImport() {
+    setPendingImport(null);
+  }
+
+  return {
+    handleDownload,
+    handleExportMarkdown,
+    handleUpload,
+    pendingImport,
+    importError,
+    confirmImport,
+    cancelImport,
+  };
 }

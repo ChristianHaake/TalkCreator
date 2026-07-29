@@ -28,13 +28,18 @@ export function Home() {
   const [pickerOpen, setPickerOpen] = useState(false);
   const [pendingTemplate, setPendingTemplate] = useState<TemplateId | null>(null);
   const configInputRef = useRef<HTMLInputElement>(null);
-  const { handleDownload, handleExportMarkdown, handleUpload } = useProjectStorage(
-    state,
-    (next) => {
-      setState(next);
-      setCanvasRevision((revision) => revision + 1);
-    },
-  );
+  const {
+    handleDownload,
+    handleExportMarkdown,
+    handleUpload,
+    pendingImport,
+    importError,
+    confirmImport,
+    cancelImport,
+  } = useProjectStorage(state, (next) => {
+    setState(next);
+    setCanvasRevision((revision) => revision + 1);
+  });
 
   if (!state) {
     return <div className={styles.loadingState}>{t("home.loadingProject")}</div>;
@@ -122,6 +127,7 @@ export function Home() {
         <div className={styles.actionGroup}>
           <span>{t("home.project")}</span>
           <button
+            aria-describedby={importError ? "project-import-error" : undefined}
             className={styles.actionButtonSecondary}
             onClick={() => configInputRef.current?.click()}
             type="button"
@@ -131,9 +137,11 @@ export function Home() {
           </button>
           <input
             accept=".json,application/json"
+            aria-hidden="true"
             className="visually-hidden"
             onChange={handleUpload}
             ref={configInputRef}
+            tabIndex={-1}
             type="file"
           />
           <button
@@ -144,6 +152,11 @@ export function Home() {
             <FileDown aria-hidden="true" size={17} />
             {t("home.save")}
           </button>
+          {importError && (
+            <p className={styles.importError} id="project-import-error" role="alert">
+              {importError}
+            </p>
+          )}
         </div>
         <div className={styles.actionGroup}>
           <span>{t("home.export")}</span>
@@ -183,6 +196,17 @@ export function Home() {
           confirmLabel={t("templates.overwriteConfirm")}
           onConfirm={confirmTemplate}
           onCancel={() => setPendingTemplate(null)}
+        />
+      )}
+
+      {pendingImport && (
+        <ConfirmDialog
+          title={t("storage.importTitle")}
+          message={t("storage.importMessage")}
+          confirmLabel={t("storage.importConfirm")}
+          danger
+          onConfirm={confirmImport}
+          onCancel={cancelImport}
         />
       )}
 
