@@ -37,7 +37,7 @@ Einsatzszenarien:
 
 Requirements:
 
-- Node.js `>=20`
+- Node.js `>=22.22.0`
 - npm `>=10`
 
 Setup:
