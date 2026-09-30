@@ -9,7 +9,7 @@ Deutschland
 
 ## Kontakt
 
-E-Mail: christianhaake@gmail.com
+E-Mail: apps@haak3.de
 
 Projekt-Repository: https://github.com/ChristianHaake/InterviewCreator
 
