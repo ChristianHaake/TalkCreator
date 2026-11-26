@@ -26,3 +26,7 @@ Für Backups oder den Wechsel auf ein anderes Gerät nutzt du **Speichern**: Das
 - **Browser:** Aktuelle Versionen von Firefox, Chrome, Edge und Safari, auf Desktop und Mobilgeräten. Auf schmalen Bildschirmen wechselst du oben zwischen Editor und Vorschau.
 - **Dateien:** Projektdateien im `.json`-Format (max. 512 KB), Export als Markdown (`.md`) oder Druck/PDF über den Browser-Druckdialog.
 - **Offline:** Nach dem ersten Besuch funktioniert die App auch ohne Internetverbindung.
+
+## Rückmeldung
+
+Fehler und Funktionsideen kannst du per E-Mail an [apps@haak3.de](mailto:apps@haak3.de) senden. Bitte teile keine persönlichen Gesprächsinhalte oder Projektexporte.

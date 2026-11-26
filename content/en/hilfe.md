@@ -26,3 +26,7 @@ For backups or moving to another device, select **Save** to download the project
 - **Browsers:** Current versions of Firefox, Chrome, Edge, and Safari on desktop and mobile. On narrow screens, use the switch at the top to move between the editor and preview.
 - **Files:** Project files use `.json` (maximum 512 KB). You can export Markdown (`.md`) or print/save a PDF through the browser's print dialog.
 - **Offline:** After the first visit, the app also works without an internet connection.
+
+## Feedback
+
+Send bug reports and feature ideas to [apps@haak3.de](mailto:apps@haak3.de). Please do not share personal conversation content or project exports.

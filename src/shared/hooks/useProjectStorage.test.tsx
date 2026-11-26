@@ -22,7 +22,10 @@ const currentProject: InterviewState = {
   updated_at: "2026-07-29T00:00:00.000Z",
   total_estimated_time: 0,
   phases: { intro: [], main: [], outro: [] },
-  checklist: [],
+  checklist: [
+    { id: "checked-item", text: "Completed task", checked: true },
+    { id: "open-item", text: "Open task", checked: false },
+  ],
   sources: [],
 };
 
@@ -37,6 +40,7 @@ function Harness() {
   const inputRef = useRef<HTMLInputElement>(null);
   const {
     handleUpload,
+    handleExportMarkdown,
     pendingImport,
     importError,
     confirmImport,
@@ -48,6 +52,7 @@ function Harness() {
       <button type="button" onClick={() => inputRef.current?.click()}>
         Laden
       </button>
+      <button type="button" onClick={handleExportMarkdown}>Markdown exportieren</button>
       <input
         aria-label="Projektdatei"
         onChange={handleUpload}
@@ -85,6 +90,26 @@ afterEach(() => {
 });
 
 describe("useProjectStorage import flow", () => {
+  it("exports checklist completion state in Markdown", async () => {
+    let exportedMarkdown = "";
+    const OriginalBlob = Blob;
+    class CapturedBlob extends OriginalBlob {
+      constructor(parts?: BlobPart[], options?: BlobPropertyBag) {
+        super(parts, options);
+        exportedMarkdown = String(parts?.[0] ?? "");
+      }
+    }
+    vi.stubGlobal("Blob", CapturedBlob);
+    vi.spyOn(URL, "createObjectURL").mockReturnValue("blob:markdown");
+    vi.spyOn(URL, "revokeObjectURL").mockImplementation(() => {});
+    vi.spyOn(HTMLAnchorElement.prototype, "click").mockImplementation(() => {});
+    renderHarness();
+    await userEvent.click(screen.getByRole("button", { name: "Markdown exportieren" }));
+
+    expect(exportedMarkdown).toContain("- [x] Completed task");
+    expect(exportedMarkdown).toContain("- [ ] Open task");
+  });
+
   it("keeps the current project until a valid import is confirmed", async () => {
     const user = userEvent.setup();
     renderHarness();

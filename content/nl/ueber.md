@@ -10,7 +10,7 @@ TalkCreator werkt volledig in je browser. Er is geen aanmelding, geen gebruikers
 
 ## Open source
 
-De broncode is gepubliceerd op https://github.com/ChristianHaake/InterviewCreator.
+De broncode is gepubliceerd op https://github.com/ChristianHaake/TalkCreator.
 
 De software is uitsluitend beschikbaar onder de GNU General Public License v3.0.
 
@@ -18,3 +18,7 @@ De software is uitsluitend beschikbaar onder de GNU General Public License v3.0.
 
 Christian Haake  
 https://github.com/ChristianHaake
+
+## Beheer en licentie
+
+Christian Haake ontwikkelt en onderhoudt TalkCreator als onderwijsproject. De software valt onder de GNU General Public License v3.0 only.

@@ -54,7 +54,9 @@ Scripts:
 - `npm run typecheck` - run TypeScript type checking
 - `npm run lint` - run oxlint
 - `npm test` - run automated tests
+- `npm run test:e2e` - run Chromium, Firefox, and WebKit browser workflows (install browsers with `npx playwright install` first)
 - `npm run verify` - run typecheck, lint, tests, and production build
+- `npm run deploy:stage` - verify, run browser tests, and deploy the static build to the configured Stage Worker (requires `npx wrangler login`)
 
 ## haak3 Standard
 

@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { ComponentProps } from 'react';
 import { useParams, Link } from 'react-router';
 import ReactMarkdown from 'react-markdown';
 import { ArrowLeft } from 'lucide-react';
@@ -7,9 +8,25 @@ import { useTranslation } from '../i18n';
 import type { Locale } from '../domain/types';
 import { resolveContentPage } from './contentPages';
 
+function ContentLink({ href, children, node: _node, ...props }: ComponentProps<'a'> & { node?: unknown }) {
+  const external = href?.startsWith('https://') || href?.startsWith('http://');
+  return (
+    <a {...props} href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+      {children}
+    </a>
+  );
+}
+
 export function ContentPage() {
   const { pageId } = useParams<{ pageId: string }>();
   const { locale, t } = useTranslation();
+  const headingRef = useRef<HTMLHeadingElement | null>(null);
+  const articleRef = useRef<HTMLElement | null>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(
+    document.activeElement instanceof HTMLElement && document.activeElement !== document.body
+      ? document.activeElement
+      : null,
+  );
   const [content, setContent] = useState<string>('');
   const [contentLanguage, setContentLanguage] = useState<Locale>(locale);
   const [isGermanFallback, setIsGermanFallback] = useState(false);
@@ -53,20 +70,32 @@ export function ContentPage() {
     };
   }, [locale, pageId]);
 
+  useEffect(() => {
+    if (!loading) (headingRef.current ?? articleRef.current)?.focus();
+  }, [loading, pageId]);
+
+  const restoreFocusAfterReturn = () => {
+    const previousTarget = returnFocusRef.current;
+    window.setTimeout(() => {
+      if (previousTarget?.isConnected) previousTarget.focus();
+      else document.getElementById('app-home-link')?.focus();
+    }, 0);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.backLink}>
-        <Link to="/">
+        <Link to="/" onClick={restoreFocusAfterReturn}>
           <ArrowLeft size={16} />
           {t("content.backToEditor")}
         </Link>
       </div>
 
-      <article className={styles.article} lang={contentLanguage}>
+      <article ref={articleRef} className={styles.article} lang={contentLanguage} tabIndex={-1}>
         {loading && <p>{t("content.loading")}</p>}
         {error && (
           <div>
-            <h1>{t("content.notFoundTitle")}</h1>
+            <h1 ref={headingRef} tabIndex={-1}>{t("content.notFoundTitle")}</h1>
             <p>{t("content.notFoundBody")}</p>
           </div>
         )}
@@ -77,7 +106,10 @@ export function ContentPage() {
                 {t("content.germanOnlyNotice")}
               </p>
             )}
-            <ReactMarkdown>{content}</ReactMarkdown>
+            <ReactMarkdown components={{
+              a: ContentLink,
+              h1: ({ node: _node, ...props }) => <h1 {...props} ref={headingRef} tabIndex={-1} />,
+            }}>{content}</ReactMarkdown>
           </>
         )}
       </article>

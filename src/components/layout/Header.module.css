@@ -114,60 +114,23 @@
   }
 }
 
-.languageSwitch {
+.languageControl {
   display: flex;
-  background-color: var(--app-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.languageSwitch button {
-  background: none;
-  border: none;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 700;
+  align-items: center;
+  gap: 0.5rem;
   color: var(--text-muted);
-  cursor: pointer;
-  min-width: 40px;
-  min-height: 40px;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  font-size: 0.875rem;
 }
 
-@media (max-width: 600px) {
-  .languageSwitch {
-    flex: 1;
-  }
-
-  .languageSwitch button {
-    flex: 1;
-    min-width: 44px;
-    min-height: 44px;
-    padding: 0.25rem;
-  }
-}
-
-.languageSwitch button:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.languageSwitch button.activeLang {
-  background-color: var(--primary);
-  color: white;
-}
-
-@media (max-width: 900px) {
-  .logo,
-  .privacyIndicator,
-  .languageSwitch button {
-    min-height: 44px;
-  }
-
-  .languageSwitch button {
-    min-width: 44px;
-  }
+.languageSelect {
+  min-width: 132px;
+  min-height: 44px;
+  padding: 0.4rem 2rem 0.4rem 0.65rem;
+  border: 1px solid var(--control-border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
 }
 
 @media print {

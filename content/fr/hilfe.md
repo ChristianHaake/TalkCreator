@@ -26,3 +26,7 @@ Pour créer une sauvegarde ou changer d'appareil, utilise **Enregistrer** afin d
 - **Navigateurs :** Versions actuelles de Firefox, Chrome, Edge et Safari sur ordinateur et mobile. Sur un écran étroit, utilise le sélecteur en haut pour passer de l'éditeur à l'aperçu.
 - **Fichiers :** Fichiers de projet `.json` (512 Ko maximum), export Markdown (`.md`) ou impression/PDF via la boîte de dialogue d'impression du navigateur.
 - **Hors ligne :** Après la première visite, l'application fonctionne également sans connexion Internet.
+
+## Retour d’expérience
+
+Envoie les signalements de bugs et idées à [apps@haak3.de](mailto:apps@haak3.de). Ne partage pas de contenu personnel de conversation ni d’export de projet.

@@ -4,7 +4,7 @@
 
 - App: `TalkCreator`
 - Live URL: `https://talkcreator.haak3.de` (rename pending; Cloudflare project still `interviewdesigner`)
-- Repository: `https://github.com/ChristianHaake/InterviewCreator`
+- Repository: `https://github.com/ChristianHaake/TalkCreator` (older repository names redirect here).
 - Intended users: `Schülerinnen und Schüler, Lehrkräfte`
 
 ## Stack
@@ -21,6 +21,7 @@
 
 - `src/domain/`: project data types, schema constants, runtime validation, and legacy migration.
 - `src/features/canvas/`: the editable and printable talk document, question movement, and canvas tests.
+- Mobile view adds a read-only preview of the same project state; print always uses the editable document's print layout.
 - `src/shared/hooks/`: persistence and import/export hooks.
 - `src/components/layout/`: app shell, header, footer, and navigation.
 - `src/pages/`: editor home page and bundled Markdown content page.
@@ -32,6 +33,7 @@
 - In-memory state is owned by `useSessionPersistence` and passed into the talk canvas and storage hooks.
 - The canvas owns one transient editing target. It is not persisted and resets after import, reset, or template selection.
 - Project autosave is stored in IndexedDB under `interview-creator-session`.
+- Failed writes are shown to the user. Invalid saved data is retained for download until a fresh project or valid import is explicitly confirmed.
 - Locale preference is stored in `localStorage` under `interview-creator-locale`.
 - Current project schema version: `1`.
 - Legacy migration accepts older `icebreakers`, `questions`, `question`, and `interviewee` fields and normalizes them to `phases`, `text`, and `partner`.
@@ -72,6 +74,7 @@
 ## Deployment
 
 - Cloudflare Pages static assets.
+- The `stage` Worker environment is configured for `stage.talkcreator.haak3.de`; its deployment requires an authenticated operator account.
 - Build command: `npm run build`.
 - Output directory: `dist`.
 - SPA fallback: configured through `wrangler.jsonc` with `not_found_handling: single-page-application`.

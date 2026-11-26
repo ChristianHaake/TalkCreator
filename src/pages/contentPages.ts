@@ -1,6 +1,6 @@
 import type { Locale } from "../domain/types";
 
-export const contentPageIds = ["hilfe", "ueber", "datenschutz", "impressum"] as const;
+export const contentPageIds = ["hilfe", "beispiele", "ueber", "unterstuetzung", "agb", "datenschutz", "impressum"] as const;
 
 export type ContentPageId = (typeof contentPageIds)[number];
 

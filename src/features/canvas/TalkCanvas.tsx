@@ -50,8 +50,13 @@ const phaseDroppableId: Record<PhaseKey, string> = {
 
 function safeSourceUrl(value: string) {
   const url = value.trim();
-  if (!url || /^javascript:/i.test(url)) return null;
-  return url;
+  if (!url) return null;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "https:" || parsed.protocol === "http:" ? parsed.href : null;
+  } catch {
+    return null;
+  }
 }
 
 export const TalkCanvas = memo(function TalkCanvas({ state, onChange }: Props) {
@@ -929,7 +934,7 @@ export const TalkCanvas = memo(function TalkCanvas({ state, onChange }: Props) {
                         <a
                           href={safeUrl}
                           target="_blank"
-                          rel="noreferrer"
+                          rel="noopener noreferrer"
                           className={styles.sourceUrl}
                         >
                           {item.url}

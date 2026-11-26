@@ -26,3 +26,7 @@ Voor een back-up of een overstap naar een ander apparaat gebruik je **Opslaan** 
 - **Browsers:** Recente versies van Firefox, Chrome, Edge en Safari op desktop en mobiele apparaten. Op smalle schermen gebruik je de schakelaar bovenaan om tussen de editor en het voorbeeld te wisselen.
 - **Bestanden:** Projectbestanden in `.json`-formaat (maximaal 512 KB), export als Markdown (`.md`) of afdrukken/PDF via het afdrukvenster van de browser.
 - **Offline:** Na het eerste bezoek werkt de app ook zonder internetverbinding.
+
+## Feedback
+
+Stuur foutmeldingen en ideeën naar [apps@haak3.de](mailto:apps@haak3.de). Deel geen persoonlijke gespreksinhoud of projectexports.

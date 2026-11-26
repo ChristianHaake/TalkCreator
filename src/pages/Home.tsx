@@ -7,6 +7,7 @@ import { MAX_QUESTIONS_PER_PHASE } from "../domain/projectSchema";
 import { createProjectFromTemplate, type TemplateId } from "../domain/templates";
 import type { InterviewPhases } from "../domain/types";
 import { TalkCanvas } from "../features/canvas/TalkCanvas";
+import { TalkPreview } from "../features/canvas/TalkPreview";
 import { moveQuestionWithAnnouncement } from "../features/canvas/questionMove";
 import { TemplatePicker } from "../features/templates/TemplatePicker";
 import { useTranslation } from "../i18n";
@@ -21,11 +22,16 @@ const droppablePhase: Record<string, keyof InterviewPhases> = {
 };
 
 export function Home() {
-  const { state, setState, clearSession, applyProject } = useSessionPersistence();
+  const {
+    state, setState, clearSession, applyProject, storageStatus, recovery,
+    downloadRecovery, recoverWithFreshProject,
+  } = useSessionPersistence();
   const { t, locale } = useTranslation();
   const [canvasRevision, setCanvasRevision] = useState(0);
   const [resetOpen, setResetOpen] = useState(false);
+  const [recoveryResetOpen, setRecoveryResetOpen] = useState(false);
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [mobileView, setMobileView] = useState<"edit" | "preview">("edit");
   const [pendingTemplate, setPendingTemplate] = useState<TemplateId | null>(null);
   const configInputRef = useRef<HTMLInputElement>(null);
   const {
@@ -37,13 +43,15 @@ export function Home() {
     confirmImport,
     cancelImport,
   } = useProjectStorage(state, (next) => {
-    setState(next);
+    applyProject(next);
     setCanvasRevision((revision) => revision + 1);
   });
 
   if (!state) {
     return <div className={styles.loadingState}>{t("home.loadingProject")}</div>;
   }
+
+  const corruptStorage = recovery?.kind === "corrupt";
 
   const confirmTemplate = () => {
     if (pendingTemplate) {
@@ -89,6 +97,34 @@ export function Home() {
 
   return (
     <div className={styles.container}>
+      <div className={styles.storageStatus} role={storageStatus === "failed" ? "alert" : "status"}>
+        {recovery?.kind === "unavailable"
+          ? t("storage.temporarySession")
+          : corruptStorage
+            ? t("storage.corruptStored")
+            : storageStatus === "pending"
+              ? t("storage.savePending")
+              : storageStatus === "failed"
+                ? t("storage.saveFailed")
+                : t("storage.saveSaved")}
+      </div>
+      {corruptStorage && (
+        <div className={styles.recoveryActions}>
+          <button type="button" onClick={downloadRecovery}>{t("storage.downloadRecovery")}</button>
+          <button type="button" onClick={() => configInputRef.current?.click()}>{t("home.load")}</button>
+          <button type="button" onClick={() => setRecoveryResetOpen(true)}>{t("storage.startFresh")}</button>
+        </div>
+      )}
+      <input
+        accept=".json,application/json"
+        aria-hidden="true"
+        className="visually-hidden"
+        onChange={handleUpload}
+        ref={configInputRef}
+        tabIndex={-1}
+        type="file"
+      />
+      {!corruptStorage && <>
       <section className={styles.canvasPanel} aria-label={t("home.canvasTitle")}>
         <div className={styles.panelHeading}>
           <div>
@@ -116,11 +152,33 @@ export function Home() {
           </div>
         </div>
 
-        <div className={styles.canvasStage}>
+        <div className={styles.mobileViewSwitch} role="group" aria-label={t("home.switchView")}>
+          <button
+            type="button"
+            aria-pressed={mobileView === "edit"}
+            onClick={() => setMobileView("edit")}
+          >
+            {t("home.editView")}
+          </button>
+          <button
+            type="button"
+            aria-pressed={mobileView === "preview"}
+            onClick={() => setMobileView("preview")}
+          >
+            {t("home.previewView")}
+          </button>
+        </div>
+
+        <div className={`${styles.canvasStage} ${mobileView === "preview" ? styles.editorHiddenOnMobile : ""}`}>
           <DragDropContext key={canvasRevision} onDragEnd={handleDragEnd}>
             <TalkCanvas state={state} onChange={setState} />
           </DragDropContext>
         </div>
+        {mobileView === "preview" && (
+          <div className={styles.mobilePreview}>
+            <TalkPreview state={state} />
+          </div>
+        )}
       </section>
 
       <div className={styles.actionBar}>
@@ -135,15 +193,6 @@ export function Home() {
             <FileUp aria-hidden="true" size={17} />
             {t("home.load")}
           </button>
-          <input
-            accept=".json,application/json"
-            aria-hidden="true"
-            className="visually-hidden"
-            onChange={handleUpload}
-            ref={configInputRef}
-            tabIndex={-1}
-            type="file"
-          />
           <button
             className={styles.actionButtonSecondary}
             onClick={handleDownload}
@@ -178,6 +227,11 @@ export function Home() {
           </button>
         </div>
       </div>
+      </>}
+
+      {importError && corruptStorage && (
+        <p className={styles.importError} id="project-import-error" role="alert">{importError}</p>
+      )}
 
       {pickerOpen && (
         <TemplatePicker
@@ -222,6 +276,20 @@ export function Home() {
             setResetOpen(false);
           }}
           onCancel={() => setResetOpen(false)}
+        />
+      )}
+
+      {recoveryResetOpen && (
+        <ConfirmDialog
+          title={t("home.resetTitle")}
+          message={t("home.resetConfirm")}
+          confirmLabel={t("storage.startFresh")}
+          danger
+          onConfirm={() => {
+            recoverWithFreshProject();
+            setRecoveryResetOpen(false);
+          }}
+          onCancel={() => setRecoveryResetOpen(false)}
         />
       )}
     </div>

@@ -62,7 +62,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 0.35rem;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0.25rem 0.5rem;
   margin-left: -0.5rem;
   color: var(--text-muted);
@@ -89,7 +89,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0.25rem 0.5rem;
   color: var(--text-muted);
 }
@@ -152,7 +152,7 @@
   padding: 0.625rem 0.75rem;
   color: var(--text);
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid var(--control-border);
   border-radius: var(--radius-sm);
   font: inherit;
 }
@@ -208,7 +208,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0.5rem 0.8rem;
   color: var(--primary);
   background: var(--primary-soft);
@@ -263,7 +263,7 @@
 }
 
 .suggestionChips button {
-  min-height: 40px;
+  min-height: 44px;
   padding: 0.4rem 0.75rem;
   color: var(--text);
   text-align: left;
@@ -332,8 +332,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   color: var(--text-muted);
   background: transparent;
@@ -443,14 +443,14 @@
 
 .compactField input {
   width: 4.5rem;
-  min-height: 40px;
+  min-height: 44px;
 }
 
 .backupField {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  min-height: 40px;
+  min-height: 44px;
   color: var(--text-muted);
   font-size: 0.8125rem;
   font-weight: 600;
@@ -467,8 +467,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   margin-left: -8px;
 }
 
@@ -505,7 +505,7 @@
 
 .checklistItem {
   display: grid;
-  grid-template-columns: 24px minmax(0, 1fr) 40px;
+  grid-template-columns: 24px minmax(0, 1fr) 44px;
   align-items: center;
   gap: 0.65rem;
   min-height: 44px;
@@ -516,7 +516,7 @@
   align-items: center;
   gap: 0.5rem;
   min-width: 0;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0.35rem 0.5rem;
 }
 
@@ -560,7 +560,7 @@
 
 .sourceItem {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 40px;
+  grid-template-columns: minmax(0, 1fr) 44px;
   gap: 0.75rem;
   align-items: start;
   padding: 1rem;
@@ -582,7 +582,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0.25rem 0.4rem;
   margin: -0.25rem -0.4rem 0;
 }
@@ -595,7 +595,7 @@
 
 .sourceUrl,
 .invalidSourceUrl {
-  min-height: 40px;
+  min-height: 44px;
   color: var(--primary);
   font-size: 0.875rem;
   overflow-wrap: anywhere;

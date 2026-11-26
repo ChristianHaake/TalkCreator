@@ -65,7 +65,7 @@ export function useProjectStorage(state: InterviewState | null, setState: (state
     if (state.checklist && state.checklist.length > 0) {
       md += `## ${t("preview.checklistTitle")}\n`;
       state.checklist.forEach(c => {
-        md += `- [ ] ${c.text}\n`;
+        md += `- [${c.checked ? "x" : " "}] ${c.text}\n`;
       });
       md += `\n`;
     }

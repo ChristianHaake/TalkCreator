@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "stage" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "stage" ]
 
 permissions:
   contents: read
@@ -27,3 +27,9 @@ jobs:
 
     - name: Run verification gate
       run: npm run verify
+
+    - name: Install browser test runtimes
+      run: npx playwright install --with-deps chromium firefox webkit
+
+    - name: Run browser workflows
+      run: npm run test:e2e

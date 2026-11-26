@@ -6,13 +6,19 @@ import type { Locale } from '../../domain/types';
 
 export function Header() {
   const { t, locale, setLocale } = useTranslation();
-  const locales: Locale[] = ['de', 'en', 'fr', 'es', 'nl'];
+  const localeNames: Record<Locale, string> = {
+    de: 'Deutsch',
+    en: 'English',
+    fr: 'Français',
+    es: 'Español',
+    nl: 'Nederlands',
+  };
 
   return (
     <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.brand}>
-          <Link to="/" className={styles.logo}>
+          <Link to="/" id="app-home-link" className={styles.logo}>
             <img
               src="/brand/talkcreator-logo-wide.png"
               alt={t("app.title")}
@@ -32,19 +38,19 @@ export function Header() {
             <span>{t("footer.localDataShort")}</span>
           </div>
           
-          <div className={styles.languageSwitch} aria-label={t("header.languageSelect")}>
-            {locales.map(l => (
-              <button
-                key={l}
-                className={locale === l ? styles.activeLang : ''}
-                onClick={() => setLocale(l)}
-                type="button"
-                aria-pressed={locale === l}
-              >
-                {l.toUpperCase()}
-              </button>
-            ))}
-          </div>
+          <label className={styles.languageControl}>
+            <span>{t("header.languageSelect")}</span>
+            <select
+              className={styles.languageSelect}
+              value={locale}
+              onChange={(event) => setLocale(event.target.value as Locale)}
+              aria-label={t("header.languageSelect")}
+            >
+              {(Object.keys(localeNames) as Locale[]).map((code) => (
+                <option key={code} value={code}>{localeNames[code]}</option>
+              ))}
+            </select>
+          </label>
         </div>
       </div>
     </header>

@@ -1,32 +1,31 @@
 :root {
-  --app-bg: #f3f5f8;
+  --app-bg: #f4f2ef;
   --surface: #ffffff;
-  --surface-subtle: #f8fafc;
-  --text: #111827;
-  --text-muted: #667085;
-  --border: #dfe3e8;
-  --primary: #245dcc;
-  --primary-hover: #1949a4;
-  --primary-soft: #eaf0ff;
+  --surface-subtle: #f8f6f3;
+  --text: #24211e;
+  --text-muted: #645c53;
+  --border: #dfdad4;
+  --control-border: #887b6b;
+  --brand: #ff9000;
+  --on-brand: #24211e;
+  --primary: #b84a00;
+  --primary-hover: #943900;
+  --primary-soft: #fff0df;
+  --link: #b84a00;
   --success: #176b3a;
   --success-soft: #edfbf2;
   --warning: #5f4700;
   --warning-soft: #fff8e8;
   --danger: #b42318;
   --danger-soft: #fef3f2;
-  --focus: rgb(36 93 204 / 35%);
+  --focus: #943900;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 20px;
   --radius-xl: 24px;
-  --shadow-sm:
-    0 0 0 1px rgb(15 23 42 / 6%),
-    0 1px 2px -1px rgb(15 23 42 / 8%),
-    0 2px 4px rgb(15 23 42 / 5%);
-  --shadow-medium:
-    0 0 0 1px rgb(15 23 42 / 7%),
-    0 8px 24px -8px rgb(15 23 42 / 18%);
-  --shadow-soft: 0 18px 45px rgb(15 23 42 / 8%);
+  --shadow-sm: 0 1px 3px rgb(36 33 30 / 10%);
+  --shadow-medium: 0 8px 24px rgb(36 33 30 / 14%);
+  --shadow-soft: 0 18px 45px rgb(36 33 30 / 8%);
 }
 
 *, *::before, *::after {
@@ -52,7 +51,7 @@ body {
 }
 
 a {
-  color: var(--primary);
+  color: var(--link);
   text-decoration: none;
 }
 a:hover {
@@ -78,7 +77,16 @@ button {
   cursor: pointer;
 }
 button:focus-visible {
-  outline: 2px solid var(--focus);
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--focus);
   outline-offset: 2px;
 }
 
@@ -110,4 +118,9 @@ button:focus-visible {
   body {
     background-color: #ffffff;
   }
+}
+
+@page {
+  size: A4;
+  margin: 14mm;
 }

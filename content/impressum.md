@@ -11,7 +11,7 @@ Deutschland
 
 E-Mail: christianhaake@gmail.com
 
-Projekt-Repository: https://github.com/ChristianHaake/InterviewCreator
+Projekt-Repository: https://github.com/ChristianHaake/TalkCreator
 
 ## Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
 

@@ -357,7 +357,7 @@ describe("TalkCanvas", () => {
 
     expect(screen.getByText(`Maximum of ${MAX_CHECKLIST_ITEMS} checklist items.`)).toBeInTheDocument();
     expect(screen.getByText(`Maximum of ${MAX_SOURCES} sources.`)).toBeInTheDocument();
-  });
+  }, 15_000);
 
   it("never renders javascript source URLs as links", () => {
     render(

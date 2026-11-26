@@ -10,7 +10,7 @@ TalkCreator funciona completamente en tu navegador. No hay inicio de sesión, cu
 
 ## Código abierto
 
-El código fuente está publicado en https://github.com/ChristianHaake/InterviewCreator.
+El código fuente está publicado en https://github.com/ChristianHaake/TalkCreator.
 
 El software se distribuye exclusivamente bajo la licencia GNU General Public License v3.0.
 
@@ -18,3 +18,7 @@ El software se distribuye exclusivamente bajo la licencia GNU General Public Lic
 
 Christian Haake  
 https://github.com/ChristianHaake
+
+## Gestión y licencia
+
+Christian Haake desarrolla y mantiene TalkCreator como proyecto educativo. El software está bajo la GNU General Public License v3.0 only.

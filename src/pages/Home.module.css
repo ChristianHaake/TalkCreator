@@ -17,6 +17,39 @@
   color: var(--text-muted);
 }
 
+.storageStatus {
+  align-self: flex-start;
+  margin: 0 0 1rem;
+  padding: 0.4rem 0.75rem;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+}
+
+.storageStatus[role="alert"] {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.recoveryActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.recoveryActions button {
+  min-height: 44px;
+  padding: 0.5rem 0.875rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--control-border);
+  border-radius: var(--radius-sm);
+  font: inherit;
+}
+
 .canvasPanel {
   display: flex;
   flex: none;
@@ -61,7 +94,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0.5rem 0.875rem;
   border-radius: var(--radius-sm);
   font-size: 0.875rem;
@@ -85,11 +118,11 @@
 
 .iconButton {
   display: inline-flex;
-  flex: 0 0 40px;
+  flex: 0 0 44px;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   color: var(--text-muted);
   background: transparent;
@@ -110,6 +143,11 @@
   background: var(--surface-subtle);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
+}
+
+.mobileViewSwitch,
+.mobilePreview {
+  display: none;
 }
 
 .actionBar {
@@ -163,6 +201,14 @@
   color: #fff;
   background: var(--primary);
   border: 1px solid var(--primary);
+}
+
+.actionButtonPrimary:focus-visible,
+.actionButtonSecondary:focus-visible,
+.templateButton:focus-visible,
+.iconButton:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
 }
 
 .actionButtonPrimary:hover {
@@ -244,6 +290,41 @@
   .actionGroup > span {
     width: 100%;
   }
+
+  .mobileViewSwitch {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.25rem;
+    padding: 0.25rem;
+    margin: 0 0.75rem 0.75rem;
+    background: var(--surface-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+  }
+
+  .mobileViewSwitch button {
+    min-height: 44px;
+    padding: 0.5rem;
+    color: var(--text);
+    background: transparent;
+    border: 0;
+    border-radius: var(--radius-sm);
+    font: inherit;
+    font-weight: 600;
+  }
+
+  .mobileViewSwitch button[aria-pressed="true"] {
+    color: #fff;
+    background: var(--primary);
+  }
+
+  .editorHiddenOnMobile {
+    display: none;
+  }
+
+  .mobilePreview {
+    display: block;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -263,8 +344,16 @@
 
   .panelHeading,
   .actionBar,
-  .importError {
+  .importError,
+  .storageStatus,
+  .recoveryActions,
+  .mobileViewSwitch,
+  .mobilePreview {
     display: none !important;
+  }
+
+  .editorHiddenOnMobile {
+    display: block;
   }
 
   .canvasPanel {

@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import "@testing-library/jest-dom/vitest";
-import { cleanup, render, screen } from "@testing-library/react";
-import { MemoryRouter, Route, Routes } from "react-router";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { Link, MemoryRouter, Route, Routes } from "react-router";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import type { Locale } from "../domain/types";
 import { LocaleProvider } from "../i18n";
@@ -63,6 +63,21 @@ afterEach(() => {
 
 describe("localized content pages", () => {
   it.each([
+    ["de", "beispiele", "Beispiele"],
+    ["en", "beispiele", "Examples"],
+    ["fr", "beispiele", "Exemples"],
+    ["es", "beispiele", "Ejemplos"],
+    ["nl", "beispiele", "Voorbeelden"],
+    ["de", "unterstuetzung", "TalkCreator unterstützen"],
+    ["en", "unterstuetzung", "Support TalkCreator"],
+    ["fr", "unterstuetzung", "Soutenir TalkCreator"],
+    ["es", "unterstuetzung", "Apoyar TalkCreator"],
+    ["nl", "unterstuetzung", "TalkCreator ondersteunen"],
+    ["de", "agb", "Nutzungsbedingungen"],
+    ["en", "agb", "Terms of use"],
+    ["fr", "agb", "Conditions d’utilisation"],
+    ["es", "agb", "Condiciones de uso"],
+    ["nl", "agb", "Gebruiksvoorwaarden"],
     ["de", "hilfe", "Hilfe"],
     ["en", "hilfe", "Help"],
     ["fr", "hilfe", "Aide"],
@@ -122,5 +137,43 @@ describe("localized content pages", () => {
       await screen.findByRole("heading", { level: 1, name: "Page not found" }),
     ).toBeInTheDocument();
     expect(screen.getByRole("article")).toHaveAttribute("lang", "en");
+    expect(document.activeElement).toBe(screen.getByRole("heading", { level: 1, name: "Page not found" }));
+  });
+
+  it("moves focus to content and restores the opening link when returning to the editor", async () => {
+    window.localStorage.setItem("interview-creator-locale", "en");
+    render(
+      <LocaleProvider>
+        <MemoryRouter initialEntries={["/"]}>
+          <Link to="/hilfe">Open help</Link>
+          <Routes>
+            <Route path="/" element={<h1>Editor</h1>} />
+            <Route path="/:pageId" element={<ContentPage />} />
+          </Routes>
+        </MemoryRouter>
+      </LocaleProvider>,
+    );
+
+    const openingLink = screen.getByRole("link", { name: "Open help" });
+    openingLink.focus();
+    fireEvent.click(openingLink);
+    const heading = await screen.findByRole("heading", { level: 1, name: "Help" });
+    await waitFor(() => expect(document.activeElement).toBe(heading));
+
+    fireEvent.click(screen.getByRole("link", { name: "Back to editor" }));
+    await waitFor(() => expect(document.activeElement).toBe(openingLink));
+  });
+
+  it("opens external content links safely in a new tab", async () => {
+    renderContentPage("en", "unterstuetzung");
+    const coffee = await screen.findByRole("link", { name: "Support TalkCreator through Buy Me a Coffee" });
+    expect(coffee).toHaveAttribute("href", "https://www.buymeacoffee.com/Haake");
+    expect(coffee).toHaveAttribute("target", "_blank");
+    expect(coffee).toHaveAttribute("rel", "noopener noreferrer");
+    const providerPrivacy = screen.getByRole("link", { name: /Buy Me a Coffee’s privacy policy/ });
+    expect(providerPrivacy).toHaveAttribute("href", "https://buymeacoffee.com/privacy-policy");
+    expect(providerPrivacy).toHaveAttribute("target", "_blank");
+    expect(providerPrivacy).toHaveAttribute("rel", "noopener noreferrer");
+    expect(screen.getByRole("link", { name: /Report a bug or suggest a feature/ })).not.toHaveAttribute("target");
   });
 });
