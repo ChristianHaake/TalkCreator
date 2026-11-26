@@ -60,7 +60,7 @@ Scripts:
 
 Standard version: `1.0.0-draft`
 
-This app follows the [haak3 Web App Standard](https://github.com/ChristianHaake/DEV-Memory/tree/main/standards/haak3-webapps). The private repository requires access permission. See [docs/standard-conformance.md](docs/standard-conformance.md) for local conformance notes.
+This app follows the [haak3 Web App Standard](https://git.2p4.org/Christian/Agent-Memory/src/branch/main/25_Development/standards/haak3-webapps). The private repository requires access permission. See [docs/standard-conformance.md](docs/standard-conformance.md) for local conformance notes.
 
 ## License
 

@@ -1,7 +1,7 @@
 # haak3 Standard Conformance
 
 Standard:
-https://github.com/ChristianHaake/DEV-Memory/tree/main/standards/haak3-webapps
+https://git.2p4.org/Christian/Agent-Memory/src/branch/main/25_Development/standards/haak3-webapps
 
 Standard version: `1.0.0-draft`
 
