@@ -1,7 +1,7 @@
 # Claude Code Instructions
 
 Follow `AGENTS.md` and the shared haak3 web app standard:
-https://github.com/ChristianHaake/haak3-webapp-standard
+https://github.com/ChristianHaake/DEV-Memory/tree/main/standards/haak3-webapps
 
 Use `/caveman` in `lite` mode for normal communication. Use `/cavecrew` for
 focused investigation, small edits, and review when Claude Code exposes

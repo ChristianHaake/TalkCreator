@@ -1,7 +1,7 @@
 # Agent Instructions
 
 This app follows the shared haak3 web app standard:
-https://github.com/ChristianHaake/haak3-webapp-standard
+https://github.com/ChristianHaake/DEV-Memory/tree/main/standards/haak3-webapps
 
 ## Required skills
 
