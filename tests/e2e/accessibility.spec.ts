@@ -49,3 +49,10 @@ test("reduced motion shortens interface transitions", async ({ page }) => {
   );
   expect(duration.split(",").every((part) => parseFloat(part) < 0.001)).toBe(true);
 });
+
+test("legal content reflows at 320 CSS pixels", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.goto("/agb");
+  await expect(page.locator("article h1")).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});

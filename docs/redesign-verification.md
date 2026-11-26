@@ -6,6 +6,7 @@ Scope: issue #20, local `stage` checkout and `https://stage.talkcreator.haak3.de
 
 - `npm run verify` on 2026-11-26: typecheck, lint, 107 unit/component tests, and production build passed. Vite still warns that the main JavaScript chunk exceeds 500 kB after minification.
 - `npm run test:e2e` on 2026-11-26: 58 passed, 2 PDF cases skipped. Chromium, Firefox, and WebKit covered edit, autosave reload, all five language workflows, JSON/Markdown export, valid/invalid import, corrupt-data recovery, direct content routes, keyboard dialog focus, reduced motion, automated WCAG A/AA checks on `/`, `/hilfe`, `/agb`, and widths 320, 360, 390, 768, and 1440 CSS pixels.
+- Three targeted browser checks for `/agb` reflow at 320 CSS pixels passed after the full run. CSS `zoom` emulation was inspected but is not treated as evidence of actual 200% browser zoom; that manual check remains open.
 - Chromium print test checks that the document is visible, UI actions are hidden, and A4 PDF generation succeeds. Playwright does not generate PDF in Firefox or WebKit; those two PDF assertions are skipped.
 - A generated two-page A4 PDF was inspected for reading order and clipping. Browser print dialogs and physical printers still need manual checks.
 
@@ -16,6 +17,20 @@ Scope: issue #20, local `stage` checkout and `https://stage.talkcreator.haak3.de
 - Have the operator review and approve the German AGB, privacy notice, and imprint, including Cloudflare logging details. Each is visibly marked as an editorial draft on Stage. German is the operator-selected authoritative language; EN/FR/ES/NL legal routes show the German source with a localized notice that it is unapproved.
 - Track the incomplete EN/FR/ES/NL legal and language acceptance separately in TalkCreator issues #21, #22, #23, and #24. Automated language paths pass in all three browser engines; operator legal approval and real-device acceptance are pending.
 - PR #19 has passing CI and CodeQL on the previous Stage commit. An independent Cavecrew subagent reviewed the `main...stage` diff: one high finding (AGB placeholder) and one low finding (40 px repository link). A product-specific AGB draft replaces the placeholder; the link is now 44 px. Final release still requires operator approval of the legal draft.
+
+### Language acceptance record
+
+Automated checks passed in Chromium, Firefox, and WebKit for language switching without lost input; localized Help, Examples, Support, template dialog, save status, import error, and export labels; JSON/Markdown download; and direct legal routes with `lang="de"` plus a localized draft notice. Human review of translation quality and operator approval of legal content remain pending.
+
+| Interface language | Technical Stage result | Legal policy | Fully accepted |
+| --- | --- | --- | --- |
+| Deutsch (`de`) | Passed | German drafts pending operator approval | No |
+| English (`en`) | Passed | German authoritative source with English draft notice; approval pending | No |
+| Français (`fr`) | Passed | German authoritative source with French draft notice; approval pending | No |
+| Español (`es`) | Passed | German authoritative source with Spanish draft notice; approval pending | No |
+| Nederlands (`nl`) | Passed | German authoritative source with Dutch draft notice; approval pending | No |
+
+Fully accepted languages: **0 of 5** until the operator and manual-device gates are complete.
 
 ## Stage deployment and smoke test
 
