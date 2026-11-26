@@ -36,3 +36,19 @@ https://github.com/ChristianHaake/DEV-Memory/tree/main/standards/haak3-webapps
 
 - Run the repository's test, lint, typecheck, and build commands.
 - Complete the relevant sections of the shared review checklist.
+
+## DEV-Memory (local development context)
+
+- When the sibling DEV-Memory checkout is available, read
+  [the project guide](../DEV-Memory/repos/guides/interviewcreator.md) before
+  investigating storage, project imports, schema changes, or verification.
+- Use the guide to find relevant implementation files and regression tests.
+  Confirm its claims against this repository's current code and instructions.
+- For a verified setup example, see
+  [the development check](../DEV-Memory/runbooks/checks/2026-10-24-talkcreator.md).
+- Record new reusable findings as new files in DEV-Memory/inbox using its
+  [submission schema](../DEV-Memory/inbox/README.md). Do not edit existing
+  entries or canonical DEV-Memory documents without an explicit curation task.
+- If DEV-Memory is unavailable, continue from this repository's documentation
+  and report the missing context. These local links do not change permissions
+  or override this repository's rules.
