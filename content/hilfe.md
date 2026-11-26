@@ -26,3 +26,11 @@ Für Backups oder den Wechsel auf ein anderes Gerät nutzt du **Speichern**: Das
 - **Browser:** Aktuelle Versionen von Firefox, Chrome, Edge und Safari, auf Desktop und Mobilgeräten. Auf schmalen Bildschirmen wechselst du oben zwischen Editor und Vorschau.
 - **Dateien:** Projektdateien im `.json`-Format (max. 512 KB), Export als Markdown (`.md`) oder Druck/PDF über den Browser-Druckdialog.
 - **Offline:** Nach dem ersten Besuch funktioniert die App auch ohne Internetverbindung.
+
+## Rückmeldung
+
+- [Fehler melden](https://haak3.atlassian.net/jira/software/form/69a50efc-0474-445e-8f01-66eb6b747cc1)
+- [Funktion vorschlagen](https://haak3.atlassian.net/jira/software/form/50d4fc51-bff4-4e21-b46e-8fd987b90d24)
+- Alternativ per E-Mail an [apps@haak3.de](mailto:apps@haak3.de).
+
+Bitte teile keine persönlichen Gesprächsinhalte oder Projektexporte.

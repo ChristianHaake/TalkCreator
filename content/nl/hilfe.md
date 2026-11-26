@@ -26,3 +26,11 @@ Voor een back-up of een overstap naar een ander apparaat gebruik je **Opslaan** 
 - **Browsers:** Recente versies van Firefox, Chrome, Edge en Safari op desktop en mobiele apparaten. Op smalle schermen gebruik je de schakelaar bovenaan om tussen de editor en het voorbeeld te wisselen.
 - **Bestanden:** Projectbestanden in `.json`-formaat (maximaal 512 KB), export als Markdown (`.md`) of afdrukken/PDF via het afdrukvenster van de browser.
 - **Offline:** Na het eerste bezoek werkt de app ook zonder internetverbinding.
+
+## Feedback
+
+- [Een fout melden](https://haak3.atlassian.net/jira/software/form/69a50efc-0474-445e-8f01-66eb6b747cc1)
+- [Een functie voorstellen](https://haak3.atlassian.net/jira/software/form/50d4fc51-bff4-4e21-b46e-8fd987b90d24)
+- Je kunt ook mailen naar [apps@haak3.de](mailto:apps@haak3.de).
+
+Deel geen persoonlijke gespreksinhoud of projectexports.

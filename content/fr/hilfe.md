@@ -26,3 +26,11 @@ Pour créer une sauvegarde ou changer d'appareil, utilise **Enregistrer** afin d
 - **Navigateurs :** Versions actuelles de Firefox, Chrome, Edge et Safari sur ordinateur et mobile. Sur un écran étroit, utilise le sélecteur en haut pour passer de l'éditeur à l'aperçu.
 - **Fichiers :** Fichiers de projet `.json` (512 Ko maximum), export Markdown (`.md`) ou impression/PDF via la boîte de dialogue d'impression du navigateur.
 - **Hors ligne :** Après la première visite, l'application fonctionne également sans connexion Internet.
+
+## Retour d'expérience
+
+- [Signaler une erreur](https://haak3.atlassian.net/jira/software/form/69a50efc-0474-445e-8f01-66eb6b747cc1)
+- [Proposer une fonctionnalité](https://haak3.atlassian.net/jira/software/form/50d4fc51-bff4-4e21-b46e-8fd987b90d24)
+- Vous pouvez aussi écrire à [apps@haak3.de](mailto:apps@haak3.de).
+
+Ne partage pas de contenu de conversation personnel ni d'export de projet.

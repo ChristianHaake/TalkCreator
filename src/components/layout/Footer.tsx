@@ -19,15 +19,13 @@ export function Footer() {
             <Link to="/impressum">{t("footer.legal")}</Link>
           </nav>
           
-          <a
+          <Link
             className={styles.coffeeLink}
-            href="https://buymeacoffee.com/Haake"
-            rel="noreferrer"
-            target="_blank"
+            to="/unterstuetzung"
           >
             <Coffee aria-hidden="true" size={16} strokeWidth={2.5} />
-            <span>{t("footer.coffee")}</span>
-          </a>
+            <span>{t("footer.support")}</span>
+          </Link>
           
           <a
             aria-label={t("footer.repository")}
