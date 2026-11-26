@@ -21,6 +21,11 @@ export function Modal({ title, onClose, children, wide }: Props) {
   const titleId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
+  const onCloseRef = useRef(onClose);
+
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
 
   useEffect(() => {
     previouslyFocused.current = document.activeElement as HTMLElement | null;
@@ -44,7 +49,7 @@ export function Modal({ title, onClose, children, wide }: Props) {
       if (event.key === "Escape") {
         event.preventDefault();
         event.stopPropagation();
-        onClose();
+        onCloseRef.current();
         return;
       }
 
@@ -86,7 +91,7 @@ export function Modal({ title, onClose, children, wide }: Props) {
       }
       previouslyFocused.current?.focus?.();
     };
-  }, [onClose]);
+  }, []);
 
   return createPortal(
     <div className={styles.backdrop} onClick={onClose}>

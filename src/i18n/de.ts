@@ -123,7 +123,7 @@ export const de = {
   "content.loading": "Inhalt wird geladen...",
   "content.notFoundTitle": "Seite nicht gefunden",
   "content.notFoundBody": "Die angeforderte Seite konnte nicht geladen werden.",
-  "content.germanOnlyNotice": "Diese Seite ist derzeit nur auf Deutsch verfügbar.",
+  "content.germanOnlyNotice": "Die deutsche Fassung ist für diese Rechtsseite maßgeblich. Der Text ist noch nicht freigegeben.",
   "common.close": "Schließen",
   "common.cancel": "Abbrechen",
   "home.resetTitle": "Projekt zurücksetzen?",

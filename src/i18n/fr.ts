@@ -123,7 +123,7 @@ export const fr = {
   "content.loading": "Chargement du contenu...",
   "content.notFoundTitle": "Page introuvable",
   "content.notFoundBody": "La page demandée n'a pas pu être chargée.",
-  "content.germanOnlyNotice": "Cette page est actuellement disponible uniquement en allemand.",
+  "content.germanOnlyNotice": "Seule la version allemande de cette page juridique fait foi. Ce projet de texte n’est pas encore approuvé.",
   "common.close": "Fermer",
   "common.cancel": "Annuler",
   "home.resetTitle": "Réinitialiser le projet ?",

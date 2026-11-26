@@ -123,7 +123,7 @@ export const en = {
   "content.loading": "Loading content...",
   "content.notFoundTitle": "Page not found",
   "content.notFoundBody": "The requested page could not be loaded.",
-  "content.germanOnlyNotice": "This page is currently available only in German.",
+  "content.germanOnlyNotice": "Only the German version of this legal page is authoritative. This draft has not been approved yet.",
   "common.close": "Close",
   "common.cancel": "Cancel",
   "home.resetTitle": "Reset project?",

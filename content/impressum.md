@@ -1,5 +1,7 @@
 # Impressum
 
+**Redaktioneller Entwurf zur Betreiberprüfung. Angaben und rechtliche Formulierungen müssen vor der Freigabe bestätigt werden.**
+
 ## Angaben gemäß § 5 DDG
 
 Christian Haake  
@@ -19,14 +21,6 @@ Christian Haake
 Alte Ziegelei 7  
 26197 Großenkneten  
 Deutschland
-
-## Haftung für Inhalte
-
-Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.
-
-## Haftung für Links
-
-Diese Website kann Links zu externen Websites Dritter enthalten, auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
 
 ## Urheberrecht
 

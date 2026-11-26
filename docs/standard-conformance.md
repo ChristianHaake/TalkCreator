@@ -11,17 +11,20 @@ Last reviewed: `2026-11-26`
 
 ## Exceptions
 
-Rule: Content linked from localized navigation should be available in the selected language.  
-Reason: Privacy and imprint translations require operator review before publication.  
-Scope: `/datenschutz` and `/impressum` for EN, FR, ES, and NL. These routes render the German source with `lang="de"` and a localized availability notice.  
-Temporary or permanent: Temporary.  
+Rule: Required content pages should be available in the selected language.
+
+Reason: The operator selected German as the authoritative language for all legal pages; unreviewed legal translations must not appear authoritative.
+
+Scope: `/agb`, `/datenschutz`, and `/impressum` for EN, FR, ES, and NL render the German source with `lang="de"` and a localized notice identifying it as authoritative.
+
+Temporary or permanent: Product language policy until the operator explicitly changes it.
 Review date: 2026-11-26.
 
 Open release content:
 
 - Help, Examples, About, and Support are available in DE, EN, FR, ES, and NL.
-- Terms has a localized route in all five languages, but the current text is an explicit draft and requires operator review before release.
-- Privacy and Imprint remain German-only. The legal text and its translations require operator review before release.
+- All three legal routes work in each interface language, with German content and a localized notice outside the German locale.
+- The German terms, privacy notice, and imprint are editorial drafts pending operator review. Stage may display these drafts; production release remains blocked until approval.
 
 Use this format for every exception:
 

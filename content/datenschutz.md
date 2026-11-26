@@ -1,10 +1,12 @@
 # Datenschutzhinweise
 
-Stand: 2026-07-21
+**Redaktioneller Entwurf zur Betreiberprüfung. Angaben zu Hosting und Aufbewahrung technischer Verbindungsdaten müssen vor der Freigabe bestätigt werden.**
+
+Stand: 26. November 2026
 
 Diese Software ist ein Open-Source-Projekt für den Einsatz im Bildungsbereich.
 
-Der Schutz deiner Daten hat hohe Priorität. TalkCreator verarbeitet deine Eingaben lokal im Browser und überträgt sie nicht an den Betreiber oder an Drittserver.
+TalkCreator verarbeitet deine Projekteingaben lokal im Browser. Beim Abruf der Website werden technische Verbindungsdaten an den Hosting-Anbieter übertragen. Projekteinträge werden dabei nicht mitgesendet.
 
 ## Verantwortlicher
 
@@ -32,9 +34,9 @@ Du kannst deine Daten jederzeit selbst löschen:
 - Über den Button **„Projekt zurücksetzen“** im Editor wird das aktuelle Projekt gelöscht und durch ein Beispielprojekt ersetzt.
 - Wenn du in deinem Browser die Websitedaten dieser Seite löschst (Cookies/Websitedaten bzw. „Browserdaten löschen“), werden alle lokal gespeicherten Daten von TalkCreator restlos entfernt.
 
-## 3. Keine Cookies und kein Tracking
+## 3. Cookies und Analyse
 
-Wir setzen keine Cookies ein. Es werden keine Web-Analyse-Tools (wie z. B. Google Analytics) verwendet. Wir zeichnen dein Nutzerverhalten nicht auf.
+Die Anwendung selbst setzt keine Cookies und bindet keine Web-Analyse-Tools ein. Ob der Hosting-Anbieter im Einzelfall technische Cookies oder Sicherheitsmechanismen einsetzt, muss der Betreiber anhand der aktiven Cloudflare-Konfiguration prüfen.
 
 ## 4. Projektdateien (Speichern / Laden / Export)
 
@@ -42,8 +44,12 @@ Beim Speichern oder Exportieren erzeugt die App eine Datei (JSON oder Markdown) 
 
 ## 5. Webhosting
 
-Die Bereitstellung der statischen Website erfolgt über Cloudflare Pages. Bei der reinen Auslieferung der Dateien (HTML, CSS, JS) werden vom Hosting-Provider üblicherweise Verbindungsdaten (wie IP-Adresse, Datum und Uhrzeit des Zugriffs) kurzfristig in Logfiles gespeichert, um die technische Sicherheit zu gewährleisten. Wir haben keinen Zugriff auf diese Logfiles. Weitere Informationen findest du in der Datenschutzerklärung von Cloudflare: https://www.cloudflare.com/privacypolicy/
+Die Website wird über Cloudflare Workers mit statischen Dateien ausgeliefert. Für die Auslieferung und technische Sicherheit verarbeitet Cloudflare Verbindungsdaten wie die IP-Adresse und den Zeitpunkt des Abrufs. Welche Protokolle aktiv sind, wer darauf zugreifen kann und wie lange die Daten aufbewahrt werden, muss der Betreiber vor Freigabe dieses Textes prüfen. Weitere Informationen: [Datenschutzhinweise von Cloudflare](https://www.cloudflare.com/privacypolicy/).
 
-## 6. Deine Rechte
+## 6. Externe Unterstützungsseite
 
-Da TalkCreator selbst keine personenbezogenen Daten erhebt oder speichert, liegen beim Betreiber keine Daten über dich vor, die beauskunftet, berichtigt oder gelöscht werden könnten. Unabhängig davon hast du nach der DSGVO grundsätzlich das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch sowie ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde. Bei Fragen wende dich an die oben genannte Kontaktadresse.
+Die Unterstützungsseite enthält einen Link zu Buy Me a Coffee. Beim bloßen Anzeigen der Seite sendet TalkCreator keine Projektdaten an diesen Anbieter. Erst wenn du den externen Link öffnest, stellt dein Browser eine Verbindung zu Buy Me a Coffee her; dort gelten dessen [Datenschutzhinweise](https://buymeacoffee.com/privacy-policy).
+
+## 7. Deine Rechte
+
+Der Betreiber speichert keine von dir eingegebenen Projektinhalte auf einem eigenen Server. Technische Verbindungsdaten beim Hosting sind davon zu unterscheiden. Fragen zu Verarbeitung und Betroffenenrechten kannst du an die oben genannte Kontaktadresse richten.

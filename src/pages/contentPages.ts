@@ -18,7 +18,7 @@ const markdownFiles = import.meta.glob("../../content/**/*.md", {
   import: "default",
 }) as Record<string, ContentLoader>;
 
-const germanOnlyPageIds = new Set<ContentPageId>(["datenschutz", "impressum"]);
+const germanOnlyPageIds = new Set<ContentPageId>(["agb", "datenschutz", "impressum"]);
 
 function isContentPageId(value: string | undefined): value is ContentPageId {
   return contentPageIds.includes(value as ContentPageId);
@@ -34,7 +34,9 @@ export function resolveContentPage(
     locale === "de"
       ? `../../content/${pageId}.md`
       : `../../content/${locale}/${pageId}.md`;
-  const localizedLoader = markdownFiles[localizedPath];
+  const localizedLoader = locale !== "de" && germanOnlyPageIds.has(pageId)
+    ? undefined
+    : markdownFiles[localizedPath];
 
   if (localizedLoader) {
     return {

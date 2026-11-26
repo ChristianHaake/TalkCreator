@@ -73,11 +73,6 @@ describe("localized content pages", () => {
     ["fr", "unterstuetzung", "Soutenir TalkCreator"],
     ["es", "unterstuetzung", "Apoyar TalkCreator"],
     ["nl", "unterstuetzung", "TalkCreator ondersteunen"],
-    ["de", "agb", "Nutzungsbedingungen"],
-    ["en", "agb", "Terms of use"],
-    ["fr", "agb", "Conditions d’utilisation"],
-    ["es", "agb", "Condiciones de uso"],
-    ["nl", "agb", "Gebruiksvoorwaarden"],
     ["de", "hilfe", "Hilfe"],
     ["en", "hilfe", "Help"],
     ["fr", "hilfe", "Aide"],
@@ -95,11 +90,12 @@ describe("localized content pages", () => {
 
       expect(await screen.findByRole("heading", { level: 1, name: heading })).toBeInTheDocument();
       expect(screen.getByRole("article")).toHaveAttribute("lang", locale);
-      expect(screen.queryByText(/available only in German|nur auf Deutsch/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/authoritative|maßgeblich|fait foi|referencia|leidend/i)).not.toBeInTheDocument();
     },
   );
 
   it.each([
+    ["agb", "Nutzungsbedingungen"],
     ["datenschutz", "Datenschutzhinweise"],
     ["impressum", "Impressum"],
   ])("renders German /%s content without a fallback notice", async (pageId, heading) => {
@@ -107,19 +103,19 @@ describe("localized content pages", () => {
 
     expect(await screen.findByRole("heading", { level: 1, name: heading })).toBeInTheDocument();
     expect(screen.getByRole("article")).toHaveAttribute("lang", "de");
-    expect(screen.queryByText("Diese Seite ist derzeit nur auf Deutsch verfügbar.")).not.toBeInTheDocument();
+    expect(screen.queryByText("Die deutsche Fassung ist für diese Rechtsseite maßgeblich. Der Text ist noch nicht freigegeben.")).not.toBeInTheDocument();
   });
 
-  it.each([
-    ["en", "datenschutz", "Datenschutzhinweise", "This page is currently available only in German."],
-    ["en", "impressum", "Impressum", "This page is currently available only in German."],
-    ["fr", "datenschutz", "Datenschutzhinweise", "Cette page est actuellement disponible uniquement en allemand."],
-    ["fr", "impressum", "Impressum", "Cette page est actuellement disponible uniquement en allemand."],
-    ["es", "datenschutz", "Datenschutzhinweise", "Esta página está disponible actualmente solo en alemán."],
-    ["es", "impressum", "Impressum", "Esta página está disponible actualmente solo en alemán."],
-    ["nl", "datenschutz", "Datenschutzhinweise", "Deze pagina is momenteel alleen in het Duits beschikbaar."],
-    ["nl", "impressum", "Impressum", "Deze pagina is momenteel alleen in het Duits beschikbaar."],
-  ] satisfies Array<[Locale, string, string, string]>)(
+  it.each(([
+    ["en", "Only the German version of this legal page is authoritative. This draft has not been approved yet."],
+    ["fr", "Seule la version allemande de cette page juridique fait foi. Ce projet de texte n’est pas encore approuvé."],
+    ["es", "Solo la versión alemana de esta página legal es la versión de referencia. Este borrador aún no está aprobado."],
+    ["nl", "Alleen de Duitse versie van deze juridische pagina is leidend. Deze concepttekst is nog niet goedgekeurd."],
+  ] satisfies Array<[Locale, string]>).flatMap(([locale, notice]) => [
+    [locale, "agb", "Nutzungsbedingungen", notice],
+    [locale, "datenschutz", "Datenschutzhinweise", notice],
+    [locale, "impressum", "Impressum", notice],
+  ] as Array<[Locale, string, string, string]>))(
     "marks %s /%s as German fallback content",
     async (locale, pageId, heading, notice) => {
       renderContentPage(locale, pageId);

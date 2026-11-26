@@ -68,8 +68,8 @@
 ## Content localization
 
 - Help and About are bundled in DE, EN, FR, ES, and NL and loaded lazily for the selected locale.
-- Privacy and Imprint remain German pending operator-reviewed translations.
-- Non-German legal routes identify the article as German and show a localized availability notice.
+- Terms, Privacy, and Imprint use the German source as the operator-selected authoritative version.
+- Non-German legal routes identify the article as German and show a localized authoritative-language notice.
 
 ## Deployment
 

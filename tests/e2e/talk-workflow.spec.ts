@@ -1,7 +1,11 @@
 import { expect, test } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
-  await page.addInitScript(() => localStorage.setItem("interview-creator-locale", "de"));
+  await page.addInitScript(() => {
+    if (!localStorage.getItem("interview-creator-locale")) {
+      localStorage.setItem("interview-creator-locale", "de");
+    }
+  });
 });
 
 test("edits a plan, restores it, switches language, and exports JSON", async ({ page }) => {
@@ -29,6 +33,64 @@ test("edits a plan, restores it, switches language, and exports JSON", async ({ 
   expect(project.title).toBe("Gespräch über Energie");
   expect(project.schemaVersion).toBe(1);
 });
+
+const languageCases = [
+  { locale: "de", saved: "Lokal gespeichert", save: "Speichern", markdown: "Export (MD)", template: "Neu aus Vorlage", templateTitle: "Neues Projekt aus Vorlage", invalid: "Die Datei enthält kein gültiges JSON.", notice: "Die deutsche Fassung ist für diese Rechtsseite maßgeblich. Der Text ist noch nicht freigegeben." },
+  { locale: "en", saved: "Saved locally", save: "Save", markdown: "Export (MD)", template: "New from template", templateTitle: "New project from template", invalid: "The file does not contain valid JSON.", notice: "Only the German version of this legal page is authoritative. This draft has not been approved yet." },
+  { locale: "fr", saved: "Enregistré localement", save: "Enregistrer", markdown: "Exporter (MD)", template: "Nouveau depuis un modèle", templateTitle: "Nouveau projet depuis un modèle", invalid: "Le fichier ne contient pas de JSON valide.", notice: "Seule la version allemande de cette page juridique fait foi. Ce projet de texte n’est pas encore approuvé." },
+  { locale: "es", saved: "Guardado localmente", save: "Guardar", markdown: "Exportar (MD)", template: "Nuevo desde plantilla", templateTitle: "Nuevo proyecto desde plantilla", invalid: "El archivo no contiene JSON válido.", notice: "Solo la versión alemana de esta página legal es la versión de referencia. Este borrador aún no está aprobado." },
+  { locale: "nl", saved: "Lokaal opgeslagen", save: "Opslaan", markdown: "Exporteren (MD)", template: "Nieuw uit sjabloon", templateTitle: "Nieuw project uit sjabloon", invalid: "Het bestand bevat geen geldige JSON.", notice: "Alleen de Duitse versie van deze juridische pagina is leidend. Deze concepttekst is nog niet goedgekeurd." },
+] as const;
+
+for (const language of languageCases) {
+  test(`${language.locale} keeps the plan and localizes workflow and legal routes`, async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByTestId("talk-canvas")).toBeVisible();
+    await page.getByRole("button", { name: /Projekttitel bearbeiten/ }).click();
+    await page.getByRole("textbox", { name: "Projekttitel" }).fill("Sprachtest");
+    await page.getByRole("button", { name: "Fertig" }).first().click();
+    await page.getByRole("combobox").selectOption(language.locale);
+    await expect(page.locator("html")).toHaveAttribute("lang", language.locale);
+    await expect(page.getByText(language.saved)).toBeVisible();
+    await expect(page.getByRole("button", { name: language.save, exact: true })).toBeVisible();
+    await expect(page.getByRole("button", { name: language.markdown, exact: true })).toBeVisible();
+    await page.getByRole("button", { name: language.template }).click();
+    await expect(page.getByRole("dialog", { name: language.templateTitle })).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+
+    const downloadPromise = page.waitForEvent("download");
+    await page.getByRole("button", { name: language.save, exact: true }).click();
+    const download = await downloadPromise;
+    const chunks: Buffer[] = [];
+    for await (const chunk of await download.createReadStream()) chunks.push(Buffer.from(chunk));
+    expect(JSON.parse(Buffer.concat(chunks).toString("utf8")).title).toBe("Sprachtest");
+    const markdownPromise = page.waitForEvent("download");
+    await page.getByRole("button", { name: language.markdown, exact: true }).click();
+    const markdown = await markdownPromise;
+    expect(markdown.suggestedFilename()).toMatch(/\.md$/);
+
+    await page.locator('input[type="file"]').setInputFiles({
+      name: "invalid.json", mimeType: "application/json", buffer: Buffer.from("{bad json"),
+    });
+    await expect(page.getByRole("alert")).toContainText(language.invalid);
+    await expect(page.getByTestId("talk-canvas").locator("h1").first()).toHaveAttribute("aria-label", "Sprachtest");
+
+    for (const route of ["hilfe", "beispiele", "unterstuetzung"]) {
+      await page.goto(`/${route}`);
+      await expect(page.getByRole("article")).toHaveAttribute("lang", language.locale);
+      await expect(page.locator("article h1")).toBeVisible();
+    }
+    for (const route of ["agb", "datenschutz", "impressum"]) {
+      await page.goto(`/${route}`);
+      await expect(page.getByRole("article")).toHaveAttribute("lang", "de");
+      await expect(page.locator("article h1")).toBeVisible();
+      if (language.locale !== "de") await expect(page.getByText(language.notice)).toHaveAttribute("lang", language.locale);
+    }
+    await page.goto("/");
+    await expect(page.getByTestId("talk-canvas").locator("h1").first()).toHaveAttribute("aria-label", "Sprachtest");
+  });
+}
 
 test("mobile preview keeps content and does not overflow", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
