@@ -120,6 +120,7 @@ export const de = {
   "storage.importMessage": "Dadurch wird dein aktuelles Projekt ersetzt. Nicht exportierte Änderungen gehen verloren.",
   "storage.importConfirm": "Projekt importieren",
   "content.backToEditor": "Zurück zum Editor",
+  "content.opensNewTab": "(öffnet in neuem Tab)",
   "content.loading": "Inhalt wird geladen...",
   "content.notFoundTitle": "Seite nicht gefunden",
   "content.notFoundBody": "Die angeforderte Seite konnte nicht geladen werden.",

@@ -120,6 +120,7 @@ export const fr = {
   "storage.importMessage": "Cette action remplace votre projet actuel. Les modifications non exportées seront perdues.",
   "storage.importConfirm": "Importer le projet",
   "content.backToEditor": "Retour à l'éditeur",
+  "content.opensNewTab": "(s’ouvre dans un nouvel onglet)",
   "content.loading": "Chargement du contenu...",
   "content.notFoundTitle": "Page introuvable",
   "content.notFoundBody": "La page demandée n'a pas pu être chargée.",

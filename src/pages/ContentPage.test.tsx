@@ -162,10 +162,11 @@ describe("localized content pages", () => {
 
   it("opens external content links safely in a new tab", async () => {
     renderContentPage("en", "unterstuetzung");
-    const coffee = await screen.findByRole("link", { name: "Support TalkCreator through Buy Me a Coffee" });
+    const coffee = await screen.findByRole("link", { name: /Support TalkCreator through Buy Me a Coffee.*opens in a new tab/ });
     expect(coffee).toHaveAttribute("href", "https://www.buymeacoffee.com/Haake");
     expect(coffee).toHaveAttribute("target", "_blank");
     expect(coffee).toHaveAttribute("rel", "noopener noreferrer");
+    expect(coffee.querySelector("svg")).toBeInTheDocument();
     const providerPrivacy = screen.getByRole("link", { name: /Buy Me a Coffee’s privacy policy/ });
     expect(providerPrivacy).toHaveAttribute("href", "https://buymeacoffee.com/privacy-policy");
     expect(providerPrivacy).toHaveAttribute("target", "_blank");

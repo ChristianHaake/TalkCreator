@@ -77,6 +77,11 @@
   color: var(--primary-hover);
 }
 
+.externalIcon {
+  margin-inline-start: 0.25em;
+  vertical-align: -0.12em;
+}
+
 @media (max-width: 900px) {
   .backLink a {
     min-height: 44px;

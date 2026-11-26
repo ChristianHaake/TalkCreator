@@ -120,6 +120,7 @@ export const nl = {
   "storage.importMessage": "Hiermee wordt je huidige project vervangen. Niet-geëxporteerde wijzigingen gaan verloren.",
   "storage.importConfirm": "Project importeren",
   "content.backToEditor": "Terug naar de editor",
+  "content.opensNewTab": "(opent in een nieuw tabblad)",
   "content.loading": "Inhoud wordt geladen...",
   "content.notFoundTitle": "Pagina niet gevonden",
   "content.notFoundBody": "De opgevraagde pagina kon niet worden geladen.",

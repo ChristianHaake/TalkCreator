@@ -2,17 +2,22 @@ import { useEffect, useRef, useState } from 'react';
 import type { ComponentProps } from 'react';
 import { useParams, Link } from 'react-router';
 import ReactMarkdown from 'react-markdown';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ExternalLink } from 'lucide-react';
 import styles from './ContentPage.module.css';
 import { useTranslation } from '../i18n';
 import type { Locale } from '../domain/types';
 import { resolveContentPage } from './contentPages';
 
 function ContentLink({ href, children, node: _node, ...props }: ComponentProps<'a'> & { node?: unknown }) {
+  const { t } = useTranslation();
   const external = href?.startsWith('https://') || href?.startsWith('http://');
   return (
     <a {...props} href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
       {children}
+      {external && <>
+        <ExternalLink aria-hidden="true" className={styles.externalIcon} size={14} />
+        <span className="visually-hidden">{t('content.opensNewTab')}</span>
+      </>}
     </a>
   );
 }
