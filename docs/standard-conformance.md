@@ -1,9 +1,11 @@
 # haak3 Standard Conformance
 
 Standard:
-https://github.com/ChristianHaake/haak3-webapp-standard
+https://github.com/ChristianHaake/DEV-Memory/tree/main/standards/haak3-webapps
 
 Standard version: `1.0.0-draft`
+
+The link above points to the current private standard (currently 1.1.0-draft); the version recorded here reflects this app’s earlier adoption.
 
 Last reviewed: `2026-07-29`
 

@@ -1,7 +1,7 @@
 # Release Review
 
 Copy the current checklist from:
-https://github.com/ChristianHaake/haak3-webapp-standard/blob/main/docs/review-checklist.md
+https://github.com/ChristianHaake/DEV-Memory/blob/main/standards/haak3-webapps/docs/review-checklist.md
 
 Record release-specific results below.
 
