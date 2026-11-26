@@ -147,6 +147,59 @@ test("invalid import preserves work and valid import requires confirmation", asy
   await expect(page.getByTestId("talk-canvas").locator("h1").first()).toHaveAttribute("aria-label", "Importierter Plan");
 });
 
+test("schema-v1 project keeps all planning fields through import, autosave, and exports", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByTestId("talk-canvas")).toBeVisible();
+  const initialDownload = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Speichern" }).click();
+  const initialChunks: Buffer[] = [];
+  for await (const chunk of await (await initialDownload).createReadStream()) initialChunks.push(Buffer.from(chunk));
+  const project = JSON.parse(Buffer.concat(initialChunks).toString("utf8"));
+  project.title = "Vollständiger Plan";
+  project.partner = "Gesprächspartner";
+  project.target_minutes = 15;
+  project.phases = {
+    intro: [{ id: "intro-1", text: "Einstiegsfrage", notes: "Einstiegsnotiz", estimated_minutes: 3, is_backup: false }],
+    main: [{ id: "main-1", text: "Kernfrage", notes: "Kernnotiz", estimated_minutes: 7, is_backup: true }],
+    outro: [{ id: "outro-1", text: "Abschlussfrage", notes: "Abschlussnotiz", estimated_minutes: 2, is_backup: false }],
+  };
+  project.checklist = [
+    { id: "check-1", text: "Erledigte Aufgabe", checked: true },
+    { id: "check-2", text: "Offene Aufgabe", checked: false },
+  ];
+  project.sources = [{ id: "source-1", title: "Quellenbeleg", url: "https://example.org/source" }];
+
+  await page.locator('input[type="file"]').setInputFiles({
+    name: "project.json", mimeType: "application/json", buffer: Buffer.from(JSON.stringify(project)),
+  });
+  await page.getByRole("button", { name: "Projekt importieren" }).click();
+  await expect(page.getByText("Lokal gespeichert")).toBeVisible();
+  await page.reload();
+  await expect(page.getByTestId("talk-canvas").locator("h1").first()).toHaveAttribute("aria-label", "Vollständiger Plan");
+
+  const jsonDownload = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Speichern" }).click();
+  const jsonChunks: Buffer[] = [];
+  for await (const chunk of await (await jsonDownload).createReadStream()) jsonChunks.push(Buffer.from(chunk));
+  const restored = JSON.parse(Buffer.concat(jsonChunks).toString("utf8"));
+  expect(restored.schemaVersion).toBe(1);
+  expect(restored.partner).toBe(project.partner);
+  expect(restored.target_minutes).toBe(project.target_minutes);
+  expect(restored.phases).toEqual(project.phases);
+  expect(restored.checklist).toEqual(project.checklist);
+  expect(restored.sources).toEqual(project.sources);
+  expect(restored.total_estimated_time).toBe(12);
+
+  const markdownDownload = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Export (MD)" }).click();
+  const markdownChunks: Buffer[] = [];
+  for await (const chunk of await (await markdownDownload).createReadStream()) markdownChunks.push(Buffer.from(chunk));
+  const markdown = Buffer.concat(markdownChunks).toString("utf8");
+  for (const text of ["Vollständiger Plan", "Gesprächspartner", "Einstiegsfrage", "Kernfrage", "Abschlussfrage", "Kernnotiz", "[Quellenbeleg](https://example.org/source)", "- [x] Erledigte Aufgabe", "- [ ] Offene Aufgabe"]) {
+    expect(markdown).toContain(text);
+  }
+});
+
 test("corrupt saved data can be downloaded and explicitly replaced", async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem("interview-creator-session", "{broken"));
   await page.goto("/");

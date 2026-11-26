@@ -7,6 +7,7 @@ Scope: issue #20, local `stage` checkout and `https://stage.talkcreator.haak3.de
 - `npm run verify` on 2026-11-26: typecheck, lint, 107 unit/component tests, and production build passed. Vite still warns that the main JavaScript chunk exceeds 500 kB after minification.
 - `npm run test:e2e` on 2026-11-26: 58 passed, 2 PDF cases skipped. Chromium, Firefox, and WebKit covered edit, autosave reload, all five language workflows, JSON/Markdown export, valid/invalid import, corrupt-data recovery, direct content routes, keyboard dialog focus, reduced motion, automated WCAG A/AA checks on `/`, `/hilfe`, `/agb`, and widths 320, 360, 390, 768, and 1440 CSS pixels.
 - Three targeted browser checks for `/agb` reflow at 320 CSS pixels passed after the full run. CSS `zoom` emulation was inspected but is not treated as evidence of actual 200% browser zoom; that manual check remains open.
+- Three targeted browser checks confirmed that a schema-v1 project containing title, partner, target time, all three question phases with notes and durations, checklist states, and a source retains those fields through JSON import, IndexedDB autosave/reload, JSON export, and Markdown export.
 - Chromium print test checks that the document is visible, UI actions are hidden, and A4 PDF generation succeeds. Playwright does not generate PDF in Firefox or WebKit; those two PDF assertions are skipped.
 - A generated two-page A4 PDF was inspected for reading order and clipping. Browser print dialogs and physical printers still need manual checks.
 
