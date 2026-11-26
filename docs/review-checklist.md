@@ -1,7 +1,7 @@
 # Release Review
 
 Copy the current checklist from:
-https://github.com/ChristianHaake/DEV-Memory/blob/main/standards/haak3-webapps/docs/review-checklist.md
+https://git.2p4.org/Christian/Agent-Memory/src/branch/main/25_Development/standards/haak3-webapps/docs/review-checklist.md
 
 Record release-specific results below.
 
