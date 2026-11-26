@@ -26,3 +26,11 @@ Para crear una copia de seguridad o cambiar de dispositivo, usa **Guardar** para
 - **Navegadores:** Versiones actuales de Firefox, Chrome, Edge y Safari en equipos de escritorio y dispositivos móviles. En pantallas estrechas, usa el selector superior para cambiar entre el editor y la vista previa.
 - **Archivos:** Archivos de proyecto `.json` (máximo 512 KB), exportación Markdown (`.md`) o impresión/PDF mediante el diálogo de impresión del navegador.
 - **Sin conexión:** Después de la primera visita, la aplicación también funciona sin conexión a Internet.
+
+## Comentarios
+
+- [Informar de un error](https://haak3.atlassian.net/jira/software/form/69a50efc-0474-445e-8f01-66eb6b747cc1)
+- [Proponer una función](https://haak3.atlassian.net/jira/software/form/50d4fc51-bff4-4e21-b46e-8fd987b90d24)
+- Como alternativa, escribe a [apps@haak3.de](mailto:apps@haak3.de).
+
+No compartas contenido personal de conversaciones ni exportaciones de proyectos.

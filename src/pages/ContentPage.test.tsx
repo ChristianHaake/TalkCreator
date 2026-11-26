@@ -73,6 +73,11 @@ describe("localized content pages", () => {
     ["fr", "ueber", "À propos de TalkCreator"],
     ["es", "ueber", "Acerca de TalkCreator"],
     ["nl", "ueber", "Over TalkCreator"],
+    ["de", "unterstuetzung", "TalkCreator unterstützen"],
+    ["en", "unterstuetzung", "Support TalkCreator"],
+    ["fr", "unterstuetzung", "Soutenir TalkCreator"],
+    ["es", "unterstuetzung", "Apoyar TalkCreator"],
+    ["nl", "unterstuetzung", "TalkCreator ondersteunen"],
   ] satisfies Array<[Locale, string, string]>)(
     "renders %s /%s content in the selected language",
     async (locale, pageId, heading) => {
@@ -81,6 +86,18 @@ describe("localized content pages", () => {
       expect(await screen.findByRole("heading", { level: 1, name: heading })).toBeInTheDocument();
       expect(screen.getByRole("article")).toHaveAttribute("lang", locale);
       expect(screen.queryByText(/available only in German|nur auf Deutsch/i)).not.toBeInTheDocument();
+    },
+  );
+
+  it.each(["de", "en", "fr", "es", "nl"] satisfies Locale[])(
+    "opens the donation provider safely for %s support content",
+    async (locale) => {
+      renderContentPage(locale, "unterstuetzung");
+
+      const supportLink = await screen.findByRole("link", { name: /Buy Me a Coffee/i });
+      expect(supportLink).toHaveAttribute("href", "https://buymeacoffee.com/Haake");
+      expect(supportLink).toHaveAttribute("target", "_blank");
+      expect(supportLink).toHaveAttribute("rel", "noopener noreferrer");
     },
   );
 

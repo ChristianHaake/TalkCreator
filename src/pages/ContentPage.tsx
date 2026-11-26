@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import type { ComponentProps } from 'react';
 import { useParams, Link } from 'react-router';
 import ReactMarkdown from 'react-markdown';
 import { ArrowLeft } from 'lucide-react';
@@ -6,6 +7,15 @@ import styles from './ContentPage.module.css';
 import { useTranslation } from '../i18n';
 import type { Locale } from '../domain/types';
 import { resolveContentPage } from './contentPages';
+
+function ContentLink({ href, children, ...props }: ComponentProps<"a">) {
+  const external = href?.startsWith("https://") || href?.startsWith("http://");
+  return (
+    <a {...props} href={href} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined}>
+      {children}
+    </a>
+  );
+}
 
 export function ContentPage() {
   const { pageId } = useParams<{ pageId: string }>();
@@ -77,7 +87,7 @@ export function ContentPage() {
                 {t("content.germanOnlyNotice")}
               </p>
             )}
-            <ReactMarkdown>{content}</ReactMarkdown>
+            <ReactMarkdown components={{ a: ContentLink }}>{content}</ReactMarkdown>
           </>
         )}
       </article>
