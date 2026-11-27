@@ -1,7 +1,8 @@
 {
   "version": 1,
-  "commit": "47daadc861006fc638691090468a996303d5a6ab",
+  "commit": "d6d65ec5191edf233e68509419dbc42289eadfc2",
   "files": {
+    "docs/creator/abnahme.md": "25091dfa421d11a0021d04ba1e5f1b1892348962edcf34f1b83abdc47a715a86",
     "scripts/sync-creator.mjs": "da12f492a5307ceeff9a601c6f26d42e454aa1454bb1d65c844df3a3e81c7923",
     "src/creator/CreatorFooter.tsx": "94b09a13798aaac667c52e1f9218c3201a8cc1a7639da604c3b2b878cb5e4967",
     "src/creator/CreatorShell.tsx": "f28cb5b933f47958fc09cdf82e3a7a72e6e568ef158428b8e1b218808227c997",
