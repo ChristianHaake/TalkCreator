@@ -1,26 +1,27 @@
+import { CreatorFooter } from '../../creator/CreatorFooter';
 import { Link } from 'react-router';
 import { Coffee } from 'lucide-react';
 import styles from './Footer.module.css';
 import { useTranslation } from '../../i18n';
 
 export function Footer() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   return (
-    <footer className={styles.footer}>
-      <div className={styles.container}>
-        <span className={styles.localNotice}>{t("footer.localData")}</span>
-        
-        <div className={styles.footerRight}>
-          <nav className={styles.nav} aria-label={t("footer.navigation")}>
+    <CreatorFooter className={styles.footer} innerClassName={styles.container}
+      navClassName={styles.nav} locale={locale} navigationLabel={t("footer.navigation")}
+      identity={<div><span className={styles.localNotice}>{t("footer.localData")}</span>
+        <p className={styles.attribution}>{t("footer.madeBy")} <a href="https://haak3.de/">haak3</a></p>
+      </div>}
+      links={<>
             <Link to="/hilfe">{t("footer.help")}</Link>
             <Link to="/beispiele">{t("footer.examples")}</Link>
             <Link to="/ueber">{t("footer.about")}</Link>
             <Link to="/agb">{t("footer.terms")}</Link>
             <Link to="/datenschutz">{t("footer.privacy")}</Link>
             <Link to="/impressum">{t("footer.legal")}</Link>
-          </nav>
-
+      </>}
+      actions={
           <div className={styles.footerActions}>
           <Link
             className={styles.coffeeLink}
@@ -54,9 +55,7 @@ export function Footer() {
             <span aria-hidden="true" className={styles.githubTooltip}>{t("footer.repository")}</span>
           </a>
           </div>
-        </div>
-      </div>
-      <p className={styles.attribution}>{t("footer.madeBy")} <a href="https://haak3.de/">haak3</a></p>
-    </footer>
+      }
+    />
   );
 }

@@ -13,6 +13,12 @@ import type { InterviewState } from "../../domain/types";
 import { LocaleProvider } from "../../i18n";
 import { useProjectStorage } from "./useProjectStorage";
 
+// jsdom lacks native dialog methods; the browser suite exercises focus and Escape.
+if (!HTMLDialogElement.prototype.showModal) {
+  HTMLDialogElement.prototype.showModal = function () { this.open = true; };
+  HTMLDialogElement.prototype.close = function () { this.open = false; };
+}
+
 const currentProject: InterviewState = {
   schemaVersion: PROJECT_SCHEMA_VERSION,
   id: "current",
@@ -138,7 +144,7 @@ describe("useProjectStorage import flow", () => {
 
     fireEvent.change(input, { target: { files: [file] } });
     expect(await screen.findByRole("dialog")).toBeInTheDocument();
-    await user.keyboard("{Escape}");
+    fireEvent(screen.getByRole("dialog"), new Event("cancel", { cancelable: true }));
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     expect(screen.getByLabelText("Aktuelles Projekt")).toHaveTextContent(
       "Current project",

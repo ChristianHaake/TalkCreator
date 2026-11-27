@@ -1,3 +1,4 @@
+import { CreatorStatus } from '../creator/CreatorShell';
 import { DragDropContext } from "@hello-pangea/dnd";
 import type { DropResult, ResponderProvided } from "@hello-pangea/dnd";
 import { FileDown, FileUp, LayoutTemplate, Printer, RotateCcw } from "lucide-react";
@@ -28,6 +29,7 @@ export function Home() {
   } = useSessionPersistence();
   const { t, locale } = useTranslation();
   const [canvasRevision, setCanvasRevision] = useState(0);
+  const dialogTrigger = useRef<HTMLElement>(null);
   const [resetOpen, setResetOpen] = useState(false);
   const [recoveryResetOpen, setRecoveryResetOpen] = useState(false);
   const [pickerOpen, setPickerOpen] = useState(false);
@@ -97,7 +99,7 @@ export function Home() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.storageStatus} role={storageStatus === "failed" ? "alert" : "status"}>
+      <CreatorStatus className={styles.storageStatus} urgent={storageStatus === "failed"}>
         {recovery?.kind === "unavailable"
           ? t("storage.temporarySession")
           : corruptStorage
@@ -107,12 +109,12 @@ export function Home() {
               : storageStatus === "failed"
                 ? t("storage.saveFailed")
                 : t("storage.saveSaved")}
-      </div>
+      </CreatorStatus>
       {corruptStorage && (
         <div className={styles.recoveryActions}>
           <button type="button" onClick={downloadRecovery}>{t("storage.downloadRecovery")}</button>
-          <button type="button" onClick={() => configInputRef.current?.click()}>{t("home.load")}</button>
-          <button type="button" onClick={() => setRecoveryResetOpen(true)}>{t("storage.startFresh")}</button>
+          <button type="button" onClick={event => { dialogTrigger.current = event.currentTarget; configInputRef.current?.click(); }}>{t("home.load")}</button>
+          <button type="button" onClick={event => { dialogTrigger.current = event.currentTarget; setRecoveryResetOpen(true); }}>{t("storage.startFresh")}</button>
         </div>
       )}
       <input
@@ -134,7 +136,7 @@ export function Home() {
           <div className={styles.headingActions}>
             <button
               className={styles.templateButton}
-              onClick={() => setPickerOpen(true)}
+              onClick={event => { dialogTrigger.current = event.currentTarget; setPickerOpen(true); }}
               type="button"
             >
               <LayoutTemplate aria-hidden="true" size={16} />
@@ -142,7 +144,7 @@ export function Home() {
             </button>
             <button
               className={styles.iconButton}
-              onClick={() => setResetOpen(true)}
+              onClick={event => { dialogTrigger.current = event.currentTarget; setResetOpen(true); }}
               title={t("home.resetProject")}
               type="button"
             >
@@ -187,7 +189,7 @@ export function Home() {
           <button
             aria-describedby={importError ? "project-import-error" : undefined}
             className={styles.actionButtonSecondary}
-            onClick={() => configInputRef.current?.click()}
+            onClick={event => { dialogTrigger.current = event.currentTarget; configInputRef.current?.click(); }}
             type="button"
           >
             <FileUp aria-hidden="true" size={17} />
@@ -245,6 +247,7 @@ export function Home() {
 
       {pendingTemplate && (
         <ConfirmDialog
+          returnFocus={dialogTrigger}
           title={t("templates.overwriteTitle")}
           message={t("templates.overwriteMessage")}
           confirmLabel={t("templates.overwriteConfirm")}
@@ -255,6 +258,7 @@ export function Home() {
 
       {pendingImport && (
         <ConfirmDialog
+          returnFocus={dialogTrigger}
           title={t("storage.importTitle")}
           message={t("storage.importMessage")}
           confirmLabel={t("storage.importConfirm")}
@@ -266,6 +270,7 @@ export function Home() {
 
       {resetOpen && (
         <ConfirmDialog
+          returnFocus={dialogTrigger}
           title={t("home.resetTitle")}
           message={t("home.resetConfirm")}
           confirmLabel={t("home.resetConfirmButton")}
@@ -281,6 +286,7 @@ export function Home() {
 
       {recoveryResetOpen && (
         <ConfirmDialog
+          returnFocus={dialogTrigger}
           title={t("home.resetTitle")}
           message={t("home.resetConfirm")}
           confirmLabel={t("storage.startFresh")}

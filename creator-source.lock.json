@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "commit": "47daadc861006fc638691090468a996303d5a6ab",
+  "files": {
+    "scripts/sync-creator.mjs": "da12f492a5307ceeff9a601c6f26d42e454aa1454bb1d65c844df3a3e81c7923",
+    "src/creator/CreatorFooter.tsx": "94b09a13798aaac667c52e1f9218c3201a8cc1a7639da604c3b2b878cb5e4967",
+    "src/creator/CreatorShell.tsx": "f28cb5b933f47958fc09cdf82e3a7a72e6e568ef158428b8e1b218808227c997",
+    "src/creator/creator-copy.ts": "abd9dabd0336d6e1d3dcf50eb3fa604f8a2100dae958552f202a3995d2a79e13",
+    "src/creator/creator.css": "f7dffceb85948e158a9ad253ede174b4169ea9e9a047a489b505dd163032d02d",
+    "tests/creator/creator-dialog-contract.ts": "0adfa8b1828297ef1aee2fa016d1be4b62f689aedf98c867c8a0fdb87ce39b96",
+    "tests/creator/creator-footer-contract.ts": "04af2b2cec653145f1c640e0dde61572a60e28bbb9b4f016ebecad0a85374904"
+  }
+}

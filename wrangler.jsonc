@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "interviewdesigner",
+  "name": "talkcreator",
   "account_id": "61b8f620d91231592cb7cded73f0dc46",
   "compatibility_date": "2026-06-25",
   "assets": {
@@ -9,6 +9,7 @@
   },
   "env": {
     "stage": {
+      "name": "interviewdesigner-stage",
       "routes": [
         { "pattern": "stage.talkcreator.haak3.de", "custom_domain": true }
       ]

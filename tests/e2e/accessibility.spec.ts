@@ -30,10 +30,10 @@ test("reset dialog traps focus and restores its trigger", async ({ page }) => {
   await page.keyboard.press("Enter");
   const dialog = page.getByRole("dialog");
   await expect(dialog).toBeVisible();
-  await expect(page.getByRole("button", { name: "Schließen" })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Abbrechen" })).toBeFocused();
   for (let index = 0; index < 5; index += 1) {
     await page.keyboard.press("Tab");
-    expect(await page.evaluate(() => document.querySelector('[role="dialog"]')?.contains(document.activeElement))).toBe(true);
+    expect(await page.evaluate(() => document.querySelector('dialog[open]')?.contains(document.activeElement))).toBe(true);
   }
   await page.keyboard.press("Escape");
   await expect(dialog).toHaveCount(0);
