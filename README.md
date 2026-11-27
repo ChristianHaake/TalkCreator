@@ -2,7 +2,7 @@
 
 Planungswerkzeug fuer strukturierte Gespraeche — Interviews, Debatten, Podcasts oder Unterricht.
 
-Live application: [https://talkcreator.haak3.de](https://talkcreator.haak3.de) (Rename ausstehend; Cloudflare-Projekt derzeit `interviewdesigner`)
+Live application: [https://talkcreator.haak3.de](https://talkcreator.haak3.de) (Cloudflare Workers: Produktion `talkcreator`, Stage `interviewdesigner-stage`)
 
 ## Purpose
 

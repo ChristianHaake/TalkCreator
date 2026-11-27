@@ -138,3 +138,4 @@
     display: none;
   }
 }
+.header[data-creator-header] { justify-content: space-between; }

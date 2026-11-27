@@ -1,10 +1,12 @@
-import { Modal } from "./Modal";
+import { useRef, type RefObject } from "react";
+import { CreatorDialog } from "../../creator/CreatorShell";
 import styles from "./ConfirmDialog.module.css";
 import { useTranslation } from "../../i18n";
 
 type Props = {
   title: string;
   message: string;
+  returnFocus?: RefObject<HTMLElement | null>;
   confirmLabel: string;
   onConfirm: () => void;
   onCancel: () => void;
@@ -12,23 +14,17 @@ type Props = {
   danger?: boolean;
 };
 
-export function ConfirmDialog({ title, message, confirmLabel, onConfirm, onCancel, danger }: Props) {
+export function ConfirmDialog({ title, message, confirmLabel, returnFocus, onConfirm, onCancel, danger }: Props) {
+  const fallback = useRef<HTMLElement>(null);
   const { t } = useTranslation();
   return (
-    <Modal title={title} onClose={onCancel}>
-      <p className={styles.message}>{message}</p>
-      <div className={styles.actions}>
-        <button type="button" className={styles.cancelButton} onClick={onCancel}>
-          {t("common.cancel")}
-        </button>
-        <button
-          type="button"
-          className={danger ? styles.dangerButton : styles.confirmButton}
-          onClick={onConfirm}
-        >
+    <CreatorDialog open closeOnBackdrop returnFocus={returnFocus ?? fallback} title={title} cancelLabel={t("common.cancel")}
+      onCancel={onCancel} className={styles.dialog} actions={
+        <button type="button" className={danger ? styles.dangerButton : styles.confirmButton} onClick={onConfirm}>
           {confirmLabel}
         </button>
-      </div>
-    </Modal>
+      }>
+      <p className={styles.message}>{message}</p>
+    </CreatorDialog>
   );
 }

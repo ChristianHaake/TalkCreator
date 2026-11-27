@@ -80,3 +80,7 @@
     transform: none;
   }
 }
+.dialog { width: 30rem; padding: 1.5rem; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+.dialog::backdrop { background: rgb(0 0 0 / 45%); }
+.dialog h2 { margin-top: 0; }
+.dialog button { cursor: pointer; }
